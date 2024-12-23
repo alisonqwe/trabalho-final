@@ -66,7 +66,7 @@ int main()
 
         printf(" Escolha uma opção do menu a seguir que deseja fazer no seu supermecado :\n");
         printf("------------------------MENU-------------------------------\n");
-        printf("  1- Cadastar produto.\n");
+        printf("  1- ......................Cadastar produto.\n");
         printf("  2- Consultar, Esitar e Realizar Entrada em Estoque. \n");
         printf("  3- Registrar saida em Estoque e controle de Caixa. \n");
         printf("  4- Consultar Caixa. \n");
