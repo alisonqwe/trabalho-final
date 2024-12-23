@@ -66,7 +66,7 @@ int main()
         printf("  2- Consultar, Esitar e Realizar Entrada em Estoque. \n");
         printf("  3- Registrar saida em Estoque e controle de Caixa. \n");
         printf("  4- Consultar Caixa. \n");
-        printf("  5- Relatórios e Estatisticas.\n");
+        printf("  5- Relatórios e ..............Estatisticas.\n");
         printf("  6- Sair. \n");
         scanf("%d", &opcao);
         switch (opcao)
