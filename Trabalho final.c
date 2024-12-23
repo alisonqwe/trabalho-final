@@ -16,6 +16,10 @@ bool verificar1(int vetor[], int tam)
 
     return false;
 }
+
+
+
+
 // printar o alimento na tela
 void aparecer(int tam, char matriz[][50])
 {
