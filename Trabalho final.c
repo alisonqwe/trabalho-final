@@ -23,11 +23,11 @@ void aparecer(int tam, char matriz[][50])
     printf("%s\n", matriz[tam]);
 }
 
-// funsão para calcular o liucro
-void calcularlucro(double *lucro, float venda[], int quanti[], float custo[], int i)
+// funsão para calcular o lruco estimado de cada produto, com base na quantidade, preço unitario e o preço de custo.
+void calcularlucro( float lucro_estimado[], float venda[], int quanti[], float custo[], int i)
 {
 
-    *lucro += ((venda[i] * quanti[i]) - custo[i]);
+    lucro_estimado[i] += ((venda[i] * quanti[i]) - custo[i]);
 }
 // funsão para consultar produto em estoque
 int consultar(int consultar, int vetor[], int tam)
@@ -54,12 +54,20 @@ int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
     return vetor[indice] += quantidade_de_produtos;
 }
 
+int saida_de_produtos(int vetor[],int quantidade_de_produtos,int indice ){
+
+  return vetor[indice]-=quantidade_de_produtos ;
+}
+
+
+
+
 int main()
 {
 
-    int opcao = 0, opcao2 = 0, id[50], quantidade[50], k = 0, quantidade_adicional = 0;
-    float precodevenda[50], precodecusto[50];
-    double lucrototal = 0;
+    int opcao = 0, opcao2 = 0, id[50], quantidade[50], k = 0, quantidade_adicional = 0,quantidade_saida=0, idconsulta,r;
+    float precodevenda[50], precodecusto[50], lucro_estimado[50];
+    double caixa = 0;
     char nome[50][50], categoria[50][50];
 
     while (opcao != 6)
@@ -99,7 +107,7 @@ int main()
             scanf("%f", &precodecusto[k]);
             printf("Digite a quantidade de produtos : ");
             scanf("%d", &quantidade[k]);
-            calcularlucro(&lucrototal, precodevenda, quantidade, precodecusto, k);
+            calcularlucro(lucro_estimado, precodevenda, quantidade, precodecusto, k);
             k++;
             break;
         case 2:
@@ -112,7 +120,7 @@ int main()
                 printf("3- Entrada em Estoque : \n");
                 printf("4- Voltar.\n");
                 scanf("%d", &opcao2);
-                int idconsulta;
+                
 
                 switch (opcao2)
                 {
@@ -120,7 +128,7 @@ int main()
                     printf("                        Consultar produto:\n");
                     printf("Digite o código do protudo, para fazer a consultar no estoque :\n");
                     scanf("%d", &idconsulta);
-                    int r = consultar(idconsulta, id, k);
+                    r = consultar(idconsulta, id, k);
                     if (r != -1)
                     {
                         printf("        Produto com com código %d encontrado !!!\n", idconsulta);
@@ -140,7 +148,7 @@ int main()
                 case 2:
                     while (opcao21 != 5)
                     {
-                      // vai editar o produto de acorde com oque ele deseja editar, com base no id do produto.
+                        // vai editar o produto de acorde com oque ele deseja editar, com base no id do produto.
                         printf("                        Editar produto:\n");
                         printf("Oque deseja fazer ?\n");
                         printf("1- Editar nome do produto.\n");
@@ -159,7 +167,7 @@ int main()
                             {
                                 printf("Nome atual do produto: %s\n", nome[r]);
                                 printf("Digite o novo nome do produto :\n");
-                                scanf("%s", &nome[r]);
+                                scanf("%s", &nome[r][50]);
                                 printf("Nome do produto editado com sucesso !!!\n");
                             }
                             else
@@ -175,7 +183,7 @@ int main()
                             {
                                 printf("Categoria atual do produto: %s\n", categoria[r]);
                                 printf("Digite a nova categoria do produto :\n");
-                                scanf("%s", &categoria[r]);
+                                scanf("%s", &categoria[r][50]);
                                 printf("Categoria do produto editado com sucesso !!!\n");
                             }
                             else
@@ -226,7 +234,7 @@ int main()
                     break;
                 case 3:
 
-                   // o usuario digita o id do produto, se o produto existir ele vai adicionar novar unidades desse mesmo produto no estoque, se o numero digitado pelo usuario for <0 vai dar um erro e ele vai ter que diigitar a quantidade novamente.
+                    // o usuario digita o id do produto, se o produto existir ele vai adicionar novar unidades desse mesmo produto no estoque, se o numero digitado pelo usuario for <0 vai dar um erro e ele vai ter que diigitar a quantidade novamente.
                     printf("                       Entrada em Estoque:\n");
                     printf("Digite o código do produto para realizar a entrada no estoque :\n");
                     scanf("%d", &idconsulta);
@@ -247,7 +255,9 @@ int main()
                             printf("ERRO!!!. A quantidade de produtos não pode ser adicionada pois é um número negativo \n Digite um número inteiro positivo :\n");
                             scanf("%d", &quantidade_adicional);
                         }
-                        printf("sucesso !!, a nova quantidade de produtos no estoque é =%d \n", adicionar_produtos(quantidade, r, quantidade_adicional));
+                        printf("sucesso !!, você retirou %d ,%s  do estoque  \n", quantidade_saida,nome[r]);
+                        printf("Restou %d, %s no estoque ",quantidade[r],nome[r]);
+
                     }
                     else
                     {
@@ -264,6 +274,35 @@ int main()
             break;
         case 3:
             printf("Opção 3: Registrar Saida em Estoque e Controle de Caixa.\n");
+            printf("\n");
+            printf("Digite o código do produto para realizar a saida em estoque :\n");
+            scanf("%d", &idconsulta);
+            r = consultar(idconsulta, id, k);
+            if (r != -1)
+            {
+                printf("Nome do produto: %s\n", nome[r]);
+                printf("Categoria do produto: %s\n", categoria[r]);
+                printf("Preço unitario do produto : %.2f \n", precodevenda[r]);
+                printf("Preço custo do produto : %.2f \n", precodecusto[r]);
+                printf("Quantidade atual do produto em estoque = %d\n", quantidade[r]);
+                printf("\n");
+                printf("Qual vai ser a quantidade de produtos que iram sair  ?\n");
+                scanf("%d", &quantidade_saida);
+                while (quantidade_saida > quantidade[r])
+                {
+
+                    printf("ERRO!!!. A quantidade de produtos no estoque insuficiente para a quantidade que deseja retirar :\n");
+                    printf("A quantidade do produto escolhido no estoque atual é = %d\n",quantidade[r]);
+                    printf("Digite uma quantidade de saida menor ou igual a quantidade do produto atual, parra da certo :\n");
+                    scanf("%d", &quantidade_saida);
+                }
+                printf("sucesso !!, a nova quantidade de produtos no estoque é =%d \n", saida_de_produtos(quantidade, quantidade_saida,r));
+            }
+            else
+            {
+                printf("Produto com código %d não encontrado !!!\n", idconsulta);
+            }
+
             break;
         case 4:
             printf("Opção 4: Consultar Caixa.\n");
