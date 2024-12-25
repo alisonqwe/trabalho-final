@@ -49,10 +49,15 @@ float calcularlucroproduto(int indice, float preco_venda[], int quan[], float pr
     return (preco_venda[indice] * quan[indice]) - preco_custo[indice];
 }
 
+int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
+{
+    return vetor[indice] += quantidade_de_produtos;
+}
+
 int main()
 {
 
-    int opcao = 0, opcao2 = 0, id[50], quantidade[50], k = 0;
+    int opcao = 0, opcao2 = 0, id[50], quantidade[50], k = 0, quantidade_adicional = 0;
     float precodevenda[50], precodecusto[50];
     double lucrototal = 0;
     char nome[50][50], categoria[50][50];
@@ -81,18 +86,18 @@ int main()
                 printf("O código digitado já existe, porfavor digite outro código :\n");
                 scanf("%d", &id[k]);
             }
-            printf("Digite o nome do produto :");
+            printf("Digite o nome do produto : ");
             scanf("%s", &nome[k]);
             // aparecer(k, nome);
-            printf("Digite a categoria do produto :\n");
+            printf("Digite a categoria do produto : ");
             scanf("%s", &categoria[k]);
             // aparecer(k, categoria);
 
-            printf("Digite o preço unitario de venda :\n");
+            printf("Digite o preço unitario de venda : ");
             scanf("%f", &precodevenda[k]);
-            printf("Digite o preço de custo de produto  :\n");
+            printf("Digite o preço de custo de produto  : ");
             scanf("%f", &precodecusto[k]);
-            printf("Digite a quantidade de produtos : \n");
+            printf("Digite a quantidade de produtos : ");
             scanf("%d", &quantidade[k]);
             calcularlucro(&lucrototal, precodevenda, quantidade, precodecusto, k);
             k++;
@@ -135,7 +140,7 @@ int main()
                 case 2:
                     while (opcao21 != 5)
                     {
-
+                      // vai editar o produto de acorde com oque ele deseja editar, com base no id do produto.
                         printf("                        Editar produto:\n");
                         printf("Oque deseja fazer ?\n");
                         printf("1- Editar nome do produto.\n");
@@ -217,6 +222,36 @@ int main()
                             printf("Opção invalida, tente novamente \n");
                             break;
                         }
+                    }
+                    break;
+                case 3:
+
+                   // o usuario digita o id do produto, se o produto existir ele vai adicionar novar unidades desse mesmo produto no estoque, se o numero digitado pelo usuario for <0 vai dar um erro e ele vai ter que diigitar a quantidade novamente.
+                    printf("                       Entrada em Estoque:\n");
+                    printf("Digite o código do produto para realizar a entrada no estoque :\n");
+                    scanf("%d", &idconsulta);
+                    r = consultar(idconsulta, id, k);
+                    if (r != -1)
+                    {
+                        printf("Nome do produto: %s\n", nome[r]);
+                        printf("Categoria do produto: %s\n", categoria[r]);
+                        printf("Preço unitario do produto : %.2f \n", precodevenda[r]);
+                        printf("Preço custo do produto : %.2f \n", precodecusto[r]);
+                        printf("Quantidade atual do produto em estoque = %d\n", quantidade[r]);
+                        printf("\n");
+                        printf("Qual vai ser a quantidade adicionada de protudos ?\n");
+                        scanf("%d", &quantidade_adicional);
+                        while (quantidade_adicional < 0)
+                        {
+
+                            printf("ERRO!!!. A quantidade de produtos não pode ser adicionada pois é um número negativo \n Digite um número inteiro positivo :\n");
+                            scanf("%d", &quantidade_adicional);
+                        }
+                        printf("sucesso !!, a nova quantidade de produtos no estoque é =%d \n", adicionar_produtos(quantidade, r, quantidade_adicional));
+                    }
+                    else
+                    {
+                        printf("Produto com código %d não encontrado !!!\n", idconsulta);
                     }
                     break;
 
