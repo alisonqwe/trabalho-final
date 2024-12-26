@@ -296,7 +296,7 @@ int main()
                     printf("Digite uma quantidade de saida menor ou igual a quantidade do produto atual, parra da certo :\n");
                     scanf("%d", &quantidade_saida);
                 }
-                printf("sucesso !!, a nova quantidade de produtos no estoque é =%d \n", saida_de_produtos(quantidade, quantidade_saida,r));
+                printf("sucesso !!, ............................a nova quantidade de produtos no estoque é =%d \n", saida_de_produtos(quantidade, quantidade_saida,r));
             }
             else
             {
