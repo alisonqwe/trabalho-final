@@ -114,7 +114,8 @@ int main()
         system("cls");
         printf("\nNúmero máximo de tentativas excedido. Acesso bloqueado.\n");
         return 1;
-    }   
+    }  
+     
 
     while (opcao != 6)
     {
