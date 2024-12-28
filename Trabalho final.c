@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>// Necessário para usar a função system()
+
 // funsão para ferificar se o codigo do produto ja existe.
 bool verificar1(int vetor[], int tam)
 {
@@ -59,6 +61,33 @@ int saida_de_produtos(int vetor[],int quantidade_de_produtos,int indice ){
   return vetor[indice]-=quantidade_de_produtos ;
 }
 
+// Função para realizar o login
+int realizarLogin(const char* usuarioCorreto, const char* senhaCorreta, int tentativasMaximas) {
+    char usuario[20];
+    char senha[20];
+    int tentativas = 0;
+
+    while (tentativas < tentativasMaximas) {
+        // Solicitar nome de usuário
+        printf("\nDigite seu nome de usuário: ");
+        scanf("%s", usuario);
+
+        // Solicitar senha
+        printf("Digite sua senha: ");
+        scanf("%s", senha);
+
+        // Verificar credenciais
+        if (strcmp(usuario, usuarioCorreto) == 0 && strcmp(senha, senhaCorreta) == 0) {
+            return 1; // Login bem-sucedido
+        } else {
+            tentativas++;
+            system("cls");
+            printf("Usuário ou senha incorretos. Tentativas restantes: %d\n", tentativasMaximas - tentativas);
+        }
+    }
+
+    return 0; // Falha no login após todas as tentativas
+}
 
 
 
@@ -69,6 +98,23 @@ int main()
     float precodevenda[50], precodecusto[50], lucro_estimado[50];
     double caixa = 0;
     char nome[50][50], categoria[50][50];
+    // Credenciais predefinidas
+    const char usuarioCorreto[] = "admin";
+    const char senhaCorreta[] = "1234";
+    const int tentativasMaximas = 3;
+
+    printf("Bem-vindo ao sistema de login!\n");
+
+    // Chamar a função de login
+    if (realizarLogin(usuarioCorreto, senhaCorreta, tentativasMaximas)) {
+        system("cls");
+        printf("\nLogin bem-sucedido! Bem-vindo ao sistema.\n");
+        printf("\n");
+    } else {
+        system("cls");
+        printf("\nNúmero máximo de tentativas excedido. Acesso bloqueado.\n");
+        return 1;
+    }   
 
     while (opcao != 6)
     {
