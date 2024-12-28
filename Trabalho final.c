@@ -102,8 +102,9 @@ int main()
     const char usuarioCorreto[] = "admin";
     const char senhaCorreta[] = "1234";
     const int tentativasMaximas = 3;
-
+    printf("\n------------------------------\n");
     printf("Bem-vindo ao sistema de login!\n");
+    printf("------------------------------\n");
 
     // Chamar a função de login
     if (realizarLogin(usuarioCorreto, senhaCorreta, tentativasMaximas)) {
