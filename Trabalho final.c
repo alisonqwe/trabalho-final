@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>// Necessário para usar a função strcmp
 #include <stdlib.h>// Necessário para usar a função system()
 
 // funsão para ferificar se o codigo do produto ja existe.
@@ -78,6 +79,7 @@ int realizarLogin(const char* usuarioCorreto, const char* senhaCorreta, int tent
 
         // Verificar credenciais
         if (strcmp(usuario, usuarioCorreto) == 0 && strcmp(senha, senhaCorreta) == 0) {
+            //A função strcmp (abreviação de string compare) é usada para comparar duas strings
             return 1; // Login bem-sucedido
         } else {
             tentativas++;
