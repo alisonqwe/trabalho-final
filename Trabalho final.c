@@ -122,6 +122,7 @@ int main()
 
     while (opcao != 6)
     {
+        opcao=0;
 
         printf(" Escolha uma opção do menu a seguir que deseja fazer no seu supermecado :\n");
         printf("--------------------------MENU-------------------------------\n");
@@ -164,6 +165,7 @@ int main()
             printf("Opção 2: Consultar, Editar e Realizar Entrada em Estoque.\n");
             while (opcao2 != 4)
             {
+                opcao2=0;
                 printf("                 Oque degeja fazer ? \n");
                 printf("1- Consultar produto : \n");
                 printf("2- Editar produto :\n");
@@ -197,6 +199,7 @@ int main()
                     int opcao21;
                 case 2:
                     while (opcao21 != 5)
+                       opcao21=0;
                     {
                         // vai editar o produto de acorde com oque ele deseja editar, com base no id do produto.
                         printf("                        Editar produto:\n");
@@ -305,8 +308,8 @@ int main()
                             printf("ERRO!!!. A quantidade de produtos não pode ser adicionada pois é um número negativo \n Digite um número inteiro positivo :\n");
                             scanf("%d", &quantidade_adicional);
                         }
-                        printf("sucesso !!, você retirou %d ,%s  do estoque  \n", quantidade_saida,nome[r]);
-                        printf("Restou %d, %s no estoque ",quantidade[r],nome[r]);
+                        adicionar_produtos(quantidade,r,quantidade_adicional);
+                        printf("sucesso !!, você adicionol %d %s  no estoque  \n", quantidade_adicional,nome[r]);
 
                     }
                     else
