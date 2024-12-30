@@ -168,10 +168,9 @@ int main()
             calcularlucro(lucro_estimado, precodevenda, quantidade, precodecusto, k);
             k++;
             break;
-            int case2 = 0;
         case 2:
-
             printf("Opção 2: Consultar, Editar e Realizar Entrada em Estoque.\n");
+            int case2 = 0;
 
             while (case2 != 4)
             {
@@ -207,9 +206,9 @@ int main()
                         printf("        Produto com código %d não encontrado !!!\n", idconsulta);
                     }
                     break;
-
                 case 2:
-                    int case21 = 0;
+                    int case21=0;
+
                     while (case21 != 5)
                     {
                         case21 = 0;
