@@ -59,10 +59,15 @@ int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
 
 int saida_de_produtos(int vetor[], int quantidade_de_produtos, int indice)
 {
-
+    
     return vetor[indice] -= quantidade_de_produtos;
 }
 
+// função para adicionar o custo quando o usuario adicionar novos produtos no estoque 
+void adicionar_custo(float custo_adici,float custo_original[],int indice){
+
+     custo_original[indice]+=custo_adici;
+}
 // Função para realizar o login
 int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tentativasMaximas)
 {
@@ -204,7 +209,7 @@ int main()
                         printf(" Preço unitario de venda : R$= %.2f\n", precodevenda[r]);
                         printf(" Preço de custo do produto : R$= %.2f\n", precodecusto[r]);
                         printf(" Quantidade do produto em estoque : %d\n", quantidade[r]);
-                        printf(" Lucro esperado do produto : R$= %.2f\n", calcularlucro(precodevenda, quantidade, precodecusto, k));
+                        printf(" Lucro esperado do produto : R$= %.2f\n", calcularlucro(precodevenda, quantidade, precodecusto, r));
                     }
                     else
                     {
@@ -317,7 +322,7 @@ int main()
                     break;
                 case 3:
 
-                    // o usuario digita o id do produto, se o produto existir ele vai adicionar novar unidades desse mesmo produto no estoque, se o numero digitado pelo usuario for <0 vai dar um erro e ele vai ter que diigitar a quantidade novamente.
+                    // o usuario digita o id do produto, se o produto existir ele vai adicionar novar unidades desse mesmo produto no estoque, se o numero digitado pelo usuario for <0 vai dar um erro e ele vai ter que digitar a quantidade novamente.
                     printf("                       Entrada em Estoque:\n");
                     printf("Digite o código do produto para realizar a entrada no estoque :\n");
                     scanf("%d", &idconsulta);
@@ -341,6 +346,7 @@ int main()
                         }
                         printf("Quanto custou os %d produtos ?\n",quantidade_adicional);
                         scanf("%f",&custo_adicional);
+                       adicionar_custo(custo_adicional,precodecusto,r);
 
                         adicionar_produtos(quantidade, r, quantidade_adicional);
                         printf("sucesso !!, você adicionol mais %d %s  no estoque  \n", quantidade_adicional, nome[r]);
