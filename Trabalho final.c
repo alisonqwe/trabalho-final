@@ -238,7 +238,7 @@ int main()
                             {
                                 printf("Nome atual do produto: %s\n", nome[r]);
                                 printf("Digite o novo nome do produto :\n");
-                                scanf("%s", &nome[r][50]);
+                                scanf("%s", &nome[r]);
                                 printf("Nome do produto editado com sucesso !!!\n");
                             }
                             else
@@ -256,7 +256,7 @@ int main()
                             {
                                 printf("Categoria atual do produto: %s\n", categoria[r]);
                                 printf("Digite a nova categoria do produto :\n");
-                                scanf("%s", &categoria[r][50]);
+                                scanf("%s", &categoria[r]);
                                 printf("Categoria do produto editado com sucesso !!!\n");
                             }
                             else
@@ -340,7 +340,7 @@ int main()
                             scanf("%d", &quantidade_adicional);
                         }
                         printf("Quanto custou os %d produtos ?\n",quantidade_adicional);
-                        scanf("%f"&custo_adicional);
+                        scanf("%f",&custo_adicional);
 
                         adicionar_produtos(quantidade, r, quantidade_adicional);
                         printf("sucesso !!, você adicionol mais %d %s  no estoque  \n", quantidade_adicional, nome[r]);
