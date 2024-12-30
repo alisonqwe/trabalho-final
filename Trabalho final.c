@@ -289,6 +289,10 @@ int main()
                             }
                             break;
 
+                        case 5:
+
+                            break;
+
                         default:
                             
                             printf("Opção invalida, tente novamente \n");
@@ -327,6 +331,10 @@ int main()
                     {
                         printf("Produto com código %d não encontrado !!!\n", idconsulta);
                     }
+                    break;
+
+                case 4:
+
                     break;
 
                 default:
