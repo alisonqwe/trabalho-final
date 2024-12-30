@@ -71,6 +71,7 @@ void adicionar_custo(float custo_adici,float custo_original[],int indice){
      custo_original[indice]+=custo_adici;
 }
 // Função para realizar o login
+
 int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tentativasMaximas)
 {
     char usuario[20];
