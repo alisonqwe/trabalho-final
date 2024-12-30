@@ -52,11 +52,13 @@ void controle_de_caixa(float *caixa, float preco_venda[], int saida, int indice)
     *caixa += (preco_venda[indice] * saida);
 }
 
+//função para adicionar produtos do estoque
 int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
 {
     return vetor[indice] += quantidade_de_produtos;
 }
 
+//função para retirar produtos do estoque
 int saida_de_produtos(int vetor[], int quantidade_de_produtos, int indice)
 {
     
