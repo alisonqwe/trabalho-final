@@ -37,6 +37,7 @@ int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tent
     return 0; // Falha no login após todas as tentativas
 }
 
+
 // funsão para ferificar se o codigo do produto ja existe.
 bool verificar1(int vetor[], int tam)
 {
