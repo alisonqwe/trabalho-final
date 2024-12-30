@@ -3,6 +3,35 @@
 #include <string.h>// Necessário para usar a função strcmp
 #include <stdlib.h>// Necessário para usar a função system()
 
+// Função para realizar o login
+int realizarLogin(const char* usuarioCorreto, const char* senhaCorreta, int tentativasMaximas) {
+    char usuario[20];
+    char senha[20];
+    int tentativas = 0;
+
+    while (tentativas < tentativasMaximas) {
+        // Solicitar nome de usuário
+        printf("\nDigite seu nome de usuário: ");
+        scanf("%s", usuario);
+
+        // Solicitar senha
+        printf("Digite sua senha: ");
+        scanf("%s", senha);
+
+        // Verificar credenciais
+        if (strcmp(usuario, usuarioCorreto) == 0 && strcmp(senha, senhaCorreta) == 0) {
+            //A função strcmp (abreviação de string compare) é usada para comparar duas strings
+            return 1; // Login bem-sucedido
+        } else {
+            tentativas++;
+            system("cls");
+            printf("Usuário ou senha incorretos. Tentativas restantes: %d\n", tentativasMaximas - tentativas);
+        }
+    }
+
+    return 0; // Falha no login após todas as tentativas
+}
+
 // funsão para ferificar se o codigo do produto ja existe.
 bool verificar1(int vetor[], int tam)
 {
@@ -62,34 +91,6 @@ int saida_de_produtos(int vetor[],int quantidade_de_produtos,int indice ){
   return vetor[indice]-=quantidade_de_produtos ;
 }
 
-// Função para realizar o login
-int realizarLogin(const char* usuarioCorreto, const char* senhaCorreta, int tentativasMaximas) {
-    char usuario[20];
-    char senha[20];
-    int tentativas = 0;
-
-    while (tentativas < tentativasMaximas) {
-        // Solicitar nome de usuário
-        printf("\nDigite seu nome de usuário: ");
-        scanf("%s", usuario);
-
-        // Solicitar senha
-        printf("Digite sua senha: ");
-        scanf("%s", senha);
-
-        // Verificar credenciais
-        if (strcmp(usuario, usuarioCorreto) == 0 && strcmp(senha, senhaCorreta) == 0) {
-            //A função strcmp (abreviação de string compare) é usada para comparar duas strings
-            return 1; // Login bem-sucedido
-        } else {
-            tentativas++;
-            system("cls");
-            printf("Usuário ou senha incorretos. Tentativas restantes: %d\n", tentativasMaximas - tentativas);
-        }
-    }
-
-    return 0; // Falha no login após todas as tentativas
-}
 
 
 
@@ -126,16 +127,16 @@ int main()
         printf(" Escolha uma opção do menu a seguir que deseja fazer no seu supermecado :\n");
         printf("--------------------------MENU-------------------------------\n");
         printf("  1- Cadastar produto.\n");
-        printf("  2- Consultar, Esitar e Realizar Entrada em Estoque. \n");
+        printf("  2- Consultar, Editar e Realizar Entrada em Estoque. \n");
         printf("  3- Registrar saida em Estoque e controle de Caixa. \n");
         printf("  4- Consultar Caixa. \n");
         printf("  5- Relatórios e Estatisticas.\n");
         printf("  6- Sair. \n");
         scanf("%d", &opcao);
+        
         switch (opcao)
         {
         case 1:
-
             printf("-------------------Cadastro de Produto-----------------\n");
             printf("Digite o codigo do produto :");
             scanf("%d", &id[k]);
@@ -157,6 +158,7 @@ int main()
             scanf("%f", &precodecusto[k]);
             printf("Digite a quantidade de produtos : ");
             scanf("%d", &quantidade[k]);
+           
             calcularlucro(lucro_estimado, precodevenda, quantidade, precodecusto, k);
             k++;
             break;
@@ -164,12 +166,13 @@ int main()
             printf("Opção 2: Consultar, Editar e Realizar Entrada em Estoque.\n");
             while (opcao2 != 4)
             {
-                printf("                 Oque degeja fazer ? \n");
+                printf("                 Oque deseja fazer ? \n");
                 printf("1- Consultar produto : \n");
                 printf("2- Editar produto :\n");
                 printf("3- Entrada em Estoque : \n");
                 printf("4- Voltar.\n");
                 scanf("%d", &opcao2);
+                
                 
 
                 switch (opcao2)
@@ -179,6 +182,7 @@ int main()
                     printf("Digite o código do protudo, para fazer a consultar no estoque :\n");
                     scanf("%d", &idconsulta);
                     r = consultar(idconsulta, id, k);
+                    
                     if (r != -1)
                     {
                         printf("        Produto com com código %d encontrado !!!\n", idconsulta);
@@ -198,7 +202,7 @@ int main()
                 case 2:
                     while (opcao21 != 5)
                     {
-                        // vai editar o produto de acorde com oque ele deseja editar, com base no id do produto.
+                        // vai editar o produto de acordo com oque ele deseja editar, com base no id do produto.
                         printf("                        Editar produto:\n");
                         printf("Oque deseja fazer ?\n");
                         printf("1- Editar nome do produto.\n");
@@ -207,6 +211,7 @@ int main()
                         printf("4- Editar preço de custo do produto.\n");
                         printf("5- Voltar.\n");
                         scanf("%d", &opcao21);
+                        
                         switch (opcao21)
                         {
                         case 1:
@@ -218,10 +223,12 @@ int main()
                                 printf("Nome atual do produto: %s\n", nome[r]);
                                 printf("Digite o novo nome do produto :\n");
                                 scanf("%s", &nome[r][50]);
+                                
                                 printf("Nome do produto editado com sucesso !!!\n");
                             }
                             else
                             {
+                                
                                 printf("Produto com código %d não encontrado !!!\n", idconsulta);
                             }
                             break;
@@ -234,10 +241,12 @@ int main()
                                 printf("Categoria atual do produto: %s\n", categoria[r]);
                                 printf("Digite a nova categoria do produto :\n");
                                 scanf("%s", &categoria[r][50]);
+                               
                                 printf("Categoria do produto editado com sucesso !!!\n");
                             }
                             else
                             {
+                               
                                 printf("Produto com código %d não encontrado !!!\n", idconsulta);
                             }
                             break;
@@ -251,10 +260,12 @@ int main()
                                 printf("Preço unitario atual do produto : %.2f \n", precodevenda[r]);
                                 printf("Digite o novo preço unitario do prduto :\n");
                                 scanf("%f", &precodevenda[r]);
+                               
                                 printf("Categoria do produto editado com sucesso !!!\n");
                             }
                             else
                             {
+                               
                                 printf("Produto com código %d não encontrado !!!\n", idconsulta);
                             }
                             break;
@@ -268,15 +279,18 @@ int main()
                                 printf("Preço custo atual do produto : %.2f \n", precodecusto[r]);
                                 printf("Digite o novo preço de custo do prduto :\n");
                                 scanf("%f", &precodecusto[r]);
+                               
                                 printf("Categoria do produto editado com sucesso !!!\n");
                             }
                             else
                             {
+                               
                                 printf("Produto com código %d não encontrado !!!\n", idconsulta);
                             }
                             break;
 
                         default:
+                            
                             printf("Opção invalida, tente novamente \n");
                             break;
                         }
@@ -343,7 +357,7 @@ int main()
 
                     printf("ERRO!!!. A quantidade de produtos no estoque insuficiente para a quantidade que deseja retirar :\n");
                     printf("A quantidade do produto escolhido no estoque atual é = %d\n",quantidade[r]);
-                    printf("Digite uma quantidade de saida menor ou igual a quantidade do produto atual, parra da certo :\n");
+                    printf("Digite uma quantidade de saida menor ou igual a quantidade do produto atual, para dar certo :\n");
                     scanf("%d", &quantidade_saida);
                 }
                 printf("sucesso !!, a nova quantidade de produtos no estoque é =%d \n", saida_de_produtos(quantidade, quantidade_saida,r));
