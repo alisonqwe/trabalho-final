@@ -37,7 +37,6 @@ int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tent
     return 0; // Falha no login após todas as tentativas
 }
 
-
 // funsão para ferificar se o codigo do produto ja existe.
 bool verificar1(int vetor[], int tam)
 {
@@ -169,10 +168,11 @@ int main()
             calcularlucro(lucro_estimado, precodevenda, quantidade, precodecusto, k);
             k++;
             break;
+            int case2 = 0;
         case 2:
-        int case2=0;
+
             printf("Opção 2: Consultar, Editar e Realizar Entrada em Estoque.\n");
-           
+
             while (case2 != 4)
             {
                 case2 = 0;
@@ -209,7 +209,7 @@ int main()
                     break;
 
                 case 2:
-                    int case21=0;
+                    int case21 = 0;
                     while (case21 != 5)
                     {
                         case21 = 0;
