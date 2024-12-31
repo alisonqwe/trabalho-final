@@ -3,6 +3,17 @@
 #include <string.h> // Necessário para usar a função strcmp
 #include <stdlib.h> // Necessário para usar a função system()
 
+// Função limpar tela para ambos.
+void limparTela() {
+    #ifdef _WIN32
+        system("cls"); // Comando para Windows
+    #elif __linux__
+        system("clear"); // Comando para Linux
+    #else
+        printf("Comando de limpar tela não suportado no seu sistema.\n");
+    #endif
+}
+
 // Função para realizar o login
 int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tentativasMaximas)
 {
@@ -19,6 +30,7 @@ int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tent
         // Solicitar senha
         printf("Digite sua senha: ");
         scanf("%s", senha);
+        limparTela(); // Chama a função que limpa a tela
 
         // Verificar credenciais
         if (strcmp(usuario, usuarioCorreto) == 0 && strcmp(senha, senhaCorreta) == 0)
@@ -169,6 +181,7 @@ int main()
         printf("  5- Relatórios e Estatisticas.\n");
         printf("  6- Sair. \n");
         scanf("%d", &opcao[i]);
+        limparTela(); // Chama a função que limpa a tela
 
         switch (opcao[i])
         {
@@ -178,6 +191,7 @@ int main()
             scanf("%d", &id[k]);
             while (verificar1(id, k))
             {
+                limparTela(); // Chama a função que limpa a tela
                 printf("\n----------------------------------------------------------------\n");
                 printf("O código digitado já existe, porfavor digite outro código :\n");
                 printf("\n----------------------------------------------------------------\n");
@@ -200,6 +214,7 @@ int main()
 
             // calcularlucro(lucro_estimado, precodevenda, quantidade, precodecusto, k);
             k++;
+            limparTela(); // Chama a função que limpa a tela
             break;
         case 2:
             printf("Opção 2: Consultar, Editar e Realizar Entrada em Estoque.\n");
@@ -215,6 +230,7 @@ int main()
                 printf("3- Entrada em Estoque : \n");
                 printf("4- Voltar.\n");
                 scanf("%d", &case2[o]);
+                limparTela(); // Chama a função que limpa a tela
 
                 switch (case2[o])
                 {
@@ -257,6 +273,7 @@ int main()
                         printf("4- Editar preço de custo do produto.\n");
                         printf("5- Voltar.\n");
                         scanf("%d", &case21[p]);
+                        limparTela(); // Chama a função que limpa a tela
 
                         switch (case21[p])
                         {
@@ -264,6 +281,7 @@ int main()
                             printf("Digite o código do produto que deseja editar o nome :\n");
                             scanf("%d", &idconsulta);
                             r = consultar(idconsulta, id, k);
+                            limparTela(); // Chama a função que limpa a tela
                             if (r != -1)
                             {
                                 printf("Nome atual do produto: %s\n", nome[r]);
@@ -283,6 +301,7 @@ int main()
                             printf("Digite o código do produto que deseja editar a categoria :\n");
                             scanf("%d", &idconsulta);
                             r = consultar(idconsulta, id, k);
+                            limparTela(); // Chama a função que limpa a tela
                             if (r != -1)
                             {
                                 printf("Categoria atual do produto: %s\n", categoria[r]);
@@ -302,6 +321,7 @@ int main()
                             printf("Digite o código do produto que deseja editar o preço de venda :\n");
                             scanf("%d", &idconsulta);
                             r = consultar(idconsulta, id, k);
+                            limparTela(); // Chama a função que limpa a tela
                             if (r != -1)
                             {
 
@@ -322,6 +342,7 @@ int main()
                             printf("Digite o código do produto que deseja editar o preço de custo :\n");
                             scanf("%d", &idconsulta);
                             r = consultar(idconsulta, id, k);
+                            limparTela(); // Chama a função que limpa a tela
                             if (r != -1)
                             {
 
@@ -339,6 +360,9 @@ int main()
                                 printf("\n----------------------------------------------------------------\n");
                             }
                             break;
+                        case 5:
+
+                            break;
                         default:
                             printf("\n----------------------------------------------------------------\n");
                             printf("Opção invalida, tente novamente \n");
@@ -354,6 +378,7 @@ int main()
                     printf("Digite o código do produto para realizar a entrada no estoque :\n");
                     scanf("%d", &idconsulta);
                     r = consultar(idconsulta, id, k);
+                    limparTela(); // Chama a função que limpa a tela
                     if (r != -1)
                     {
                         printf("Nome do produto: %s\n", nome[r]);
@@ -385,6 +410,9 @@ int main()
                         printf("\n----------------------------------------------------------------\n");
                     }
                     break;
+                case 4:
+
+                    break;
 
                 default:
                     printf("\n----------------------------------------------------------------\n");
@@ -401,6 +429,7 @@ int main()
             printf("Digite o código do produto para realizar a saida em estoque :\n");
             scanf("%d", &idconsulta);
             r = consultar(idconsulta, id, k);
+            limparTela(); // Chama a função que limpa a tela
             if (r != -1)
             {
                 printf("Nome do produto: %s\n", nome[r]);
