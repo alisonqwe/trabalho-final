@@ -182,6 +182,9 @@ int main()
         printf("  6- Sair. \n");
         scanf("%d", &opcao[i]);
         limparTela(); // Chama a função que limpa a tela
+        if(opcao[i]==6){
+            return 0;
+        }
 
         switch (opcao[i])
         {
