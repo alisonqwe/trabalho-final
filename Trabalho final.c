@@ -242,7 +242,7 @@ int main()
                     }
                     break;
                 case 2:
-                    int p = 0;
+                    p = 0;
                     while (case21[p] != 5)
                     {
                         p++;
