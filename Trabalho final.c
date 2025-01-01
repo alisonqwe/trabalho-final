@@ -303,8 +303,7 @@ int main()
                         printf(" Preço de custo do produto : R$= %.2f\n", precodecusto[r]);
                         printf(" Quantidade do produto em estoque : %d\n", quantidade[r]);
                         printf(" Lucro esperado do produto : R$= %.2f\n", calcularlucroproduto(r, precodevenda, quantidade, precodecusto));
-                        while (getchar() != '\n')
-                            ; // Remove o '\n' ou qualquer caractere restante no buffer
+                        while (getchar() != '\n'); // Remove o '\n' ou qualquer caractere restante no buffer
                         printf("\nPressione Enter para voltar ao menu.\n");
                         getchar();    // Aguarda até o usuário pressionar Enter
                         limparTela(); // Chama a função que limpa a tela
@@ -329,7 +328,7 @@ int main()
                         printf("Oque deseja fazer ?\n");
                         printf("1- Editar nome do produto.\n");
                         printf("2- Editar categoria do produto.\n");
-                        printf("3- Editar preço de unitario do produto.\n");
+                        printf("3- Editar preço unitario do produto.\n");
                         printf("4- Editar preço de custo do produto.\n");
                         printf("5- Voltar.\n");
                         scanf("%d", &case21[p]);
@@ -454,7 +453,7 @@ int main()
                     break;
                 case 3:
 
-                    // o usuario digita o id do produto, se o produto existir ele vai adicionar novar unidades desse mesmo produto no estoque, se o numero digitado pelo usuario for <0 vai dar um erro e ele vai ter que diigitar a quantidade novamente.
+                    // o usuario digita o id do produto, se o produto existir ele vai adicionar novas unidades desse mesmo produto no estoque, se o numero digitado pelo usuario for <0 vai dar um erro e ele vai ter que diigitar a quantidade novamente.
                     printf("                       Entrada em Estoque:\n");
                     printf("Digite o código do produto para realizar a entrada no estoque :\n");
                     scanf("%d", &idconsulta);
@@ -485,8 +484,7 @@ int main()
                         printf("sucesso !!, adicionou %d %s  no estoque  \n", quantidade_adicional, nome[r]);
                         adicionar_produtos(quantidade, r, quantidade_adicional);
                         printf("Contem %d unidades de %s em estoque no momento\n", quantidade[r], nome[r]);
-                        while (getchar() != '\n')
-                            ; // Remove o '\n' ou qualquer caractere restante no buffer
+                        while (getchar() != '\n'); // Remove o '\n' ou qualquer caractere restante no buffer
                         printf("\nPressione Enter para voltar ao menu.\n");
                         getchar();    // Aguarda até o usuário pressionar Enter
                         limparTela(); // Chama a função que limpa a tela
@@ -531,14 +529,16 @@ int main()
                 while (quantidade_saida > quantidade[r])
                 {
                     limparTela(); // Chama a função que limpa a tela
-                    printf("\n----------------------------------------------------------------\n");
+                    printf("\n-------------------------------------------------------------------------------------------------\n");
                     printf("ERRO!!!. A quantidade de produtos no estoque insuficiente para a quantidade que deseja retirar :\n");
-                    printf("A quantidade do produto escolhido no estoque atual é = %d\n", quantidade[r]);
+                    printf("\n-------------------------------------------------------------------------------------------------\n");
+                    printf("A quantidade do produto disponivel no estoque atual é = %d\n", quantidade[r]);
+                    printf("\n");
                     printf("Digite uma quantidade de saida menor ou igual a quantidade do produto atual, para dar certo :\n");
                     scanf("%d", &quantidade_saida);
                 }
                 limparTela(); // Chama a função que limpa a tela
-                printf("sucesso !!, a nova quantidade de produtos no estoque é =%d \n", saida_de_produtos(quantidade, quantidade_saida, r));
+                printf("sucesso !!, a nova quantidade de produtos no estoque é = %d \n", saida_de_produtos(quantidade, quantidade_saida, r));
 
                 if (quantidade[r] < 3) // Verifica se a quantidade do estoque está baixa.
                 {
@@ -550,7 +550,7 @@ int main()
 
                 adicionar_lucro(&caixa, quantidade_saida, precodevenda, r);
                 printf("Caixa atualizado !!!!!!\n");
-                printf(" Caixa = R$ %.2f\n", caixa);
+                printf("Caixa = R$ %.2f\n", caixa);
                 while (getchar() != '\n')
                     ; // Remove o '\n' ou qualquer caractere restante no buffer
                 printf("\nPressione Enter para voltar ao menu.\n");
