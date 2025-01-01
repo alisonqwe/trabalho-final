@@ -4,14 +4,15 @@
 #include <stdlib.h> // Necessário para usar a função system()
 
 // Função limpar tela para ambos.
-void limparTela() {
-    #ifdef _WIN32
-        system("cls"); // Comando para Windows
-    #elif __linux__
-        system("clear"); // Comando para Linux
-    #else
-        printf("Comando de limpar tela não suportado no seu sistema.\n");
-    #endif
+void limparTela()
+{
+#ifdef _WIN32
+    system("cls"); // Comando para Windows
+#elif __linux__
+    system("clear"); // Comando para Linux
+#else
+    printf("Comando de limpar tela não suportado no seu sistema.\n");
+#endif
 }
 
 // Função para realizar o login
@@ -139,12 +140,14 @@ int saida_de_produtos(int vetor[], int quantidade_de_produtos, int indice)
     return vetor[indice] -= quantidade_de_produtos;
 }
 // Função para consultar caixa.
-void consultarCaixa(float caixa, int k, int quantidade[], float preco_venda[], float preco_custo[]) {
+void consultarCaixa(float caixa, int k, int quantidade[], float preco_venda[], float preco_custo[])
+{
     printf("---------------------- Consultar Caixa ----------------------\n");
     printf("Balanço atual do caixa: R$ %.2f\n", caixa);
 
     // Verificar se existem produtos cadastrados
-    if (k == 0) {
+    if (k == 0)
+    {
         printf("Nenhum produto registrado no sistema.\n");
         return;
     }
@@ -152,9 +155,10 @@ void consultarCaixa(float caixa, int k, int quantidade[], float preco_venda[], f
     float lucroTotal = 0.0; // Variável para armazenar o lucro total estimado
 
     printf("\nProdutos registrados no sistema:\n");
-    for (int i = 0; i < k; i++) {
+    for (int i = 0; i < k; i++)
+    {
         // Calcular lucro estimado para o produto atual
-        float lucroProduto = (preco_venda[i] - preco_custo[i]) * quantidade[i];
+        float lucroProduto = (preco_venda[i] * quantidade[i]) - preco_custo[i];
         lucroTotal += lucroProduto;
 
         // Exibir detalhes do produto
@@ -171,13 +175,12 @@ void consultarCaixa(float caixa, int k, int quantidade[], float preco_venda[], f
     printf("Lucro total estimado com os produtos: R$ %.2f\n", lucroTotal);
     printf("------------------------------------------------------------\n");
     // Limpar o buffer
-    while (getchar() != '\n');  // Remove o '\n' ou qualquer caractere restante no buffer
+    while (getchar() != '\n')
+        ; // Remove o '\n' ou qualquer caractere restante no buffer
     printf("Pressione Enter para continuar.");
-    getchar(); // Aguarda até o usuário pressionar Enter
+    getchar();    // Aguarda até o usuário pressionar Enter
     limparTela(); // Chama a função que limpa a tela
 }
-
-
 
 int main()
 {
@@ -221,7 +224,8 @@ int main()
         printf("  6- Sair. \n");
         scanf("%d", &opcao[i]);
         limparTela(); // Chama a função que limpa a tela
-        if(opcao[i]==6){
+        if (opcao[i] == 6)
+        {
             return 0;
         }
 
@@ -248,20 +252,21 @@ int main()
 
             printf("Digite o preço unitario de venda : ");
             scanf("%f", &precodevenda[k]);
-            printf("Digite o preço de custo de produto  : ");
-            scanf("%f", &precodecusto[k]);
-            caixa -= precodecusto[k];
             printf("Digite a quantidade de produtos : ");
             scanf("%d", &quantidade[k]);
+            printf("Digite o preço que custou os %d produto :",quantidade[k]);
+            scanf("%f", &precodecusto[k]);
+            caixa -= precodecusto[k];
 
             // calcularlucro(lucro_estimado, precodevenda, quantidade, precodecusto, k);
             k++;
             limparTela(); // Chama a função que limpa a tela
             printf("Produto cadastrado com sucesso!\n");
 
-            while (getchar() != '\n');  // Remove o '\n' ou qualquer caractere restante no buffer
+            while (getchar() != '\n')
+                ; // Remove o '\n' ou qualquer caractere restante no buffer
             printf("\nPressione Enter para continuar.\n");
-            getchar(); // Aguarda até o usuário pressionar Enter
+            getchar();    // Aguarda até o usuário pressionar Enter
             limparTela(); // Chama a função que limpa a tela
             break;
         case 2:
@@ -298,11 +303,12 @@ int main()
                         printf(" Preço de custo do produto : R$= %.2f\n", precodecusto[r]);
                         printf(" Quantidade do produto em estoque : %d\n", quantidade[r]);
                         printf(" Lucro esperado do produto : R$= %.2f\n", calcularlucroproduto(r, precodevenda, quantidade, precodecusto));
-                        while (getchar() != '\n');  // Remove o '\n' ou qualquer caractere restante no buffer
+                        while (getchar() != '\n')
+                            ; // Remove o '\n' ou qualquer caractere restante no buffer
                         printf("\nPressione Enter para voltar ao menu.\n");
-                        getchar(); // Aguarda até o usuário pressionar Enter
+                        getchar();    // Aguarda até o usuário pressionar Enter
                         limparTela(); // Chama a função que limpa a tela
-            break;
+                        break;
                     }
                     else
                     {
@@ -344,9 +350,10 @@ int main()
                                 limparTela(); // Chama a função que limpa a tela
                                 printf("Nome do produto editado com sucesso !!!\n");
 
-                                while (getchar() != '\n');  // Remove o '\n' ou qualquer caractere restante no buffer
+                                while (getchar() != '\n')
+                                    ; // Remove o '\n' ou qualquer caractere restante no buffer
                                 printf("\nPressione Enter para voltar ao menu.\n");
-                                getchar(); // Aguarda até o usuário pressionar Enter
+                                getchar();    // Aguarda até o usuário pressionar Enter
                                 limparTela(); // Chama a função que limpa a tela
                             }
                             else
@@ -368,9 +375,10 @@ int main()
                                 scanf("%s", &categoria[r]);
                                 limparTela(); // Chama a função que limpa a tela
                                 printf("Categoria do produto editado com sucesso !!!\n");
-                                while (getchar() != '\n');  // Remove o '\n' ou qualquer caractere restante no buffer
+                                while (getchar() != '\n')
+                                    ; // Remove o '\n' ou qualquer caractere restante no buffer
                                 printf("\nPressione Enter para voltar ao menu.\n");
-                                getchar(); // Aguarda até o usuário pressionar Enter
+                                getchar();    // Aguarda até o usuário pressionar Enter
                                 limparTela(); // Chama a função que limpa a tela
                             }
                             else
@@ -393,9 +401,10 @@ int main()
                                 scanf("%f", &precodevenda[r]);
                                 limparTela(); // Chama a função que limpa a tela
                                 printf("Categoria do produto editado com sucesso !!!\n");
-                                while (getchar() != '\n');  // Remove o '\n' ou qualquer caractere restante no buffer
+                                while (getchar() != '\n')
+                                    ; // Remove o '\n' ou qualquer caractere restante no buffer
                                 printf("\nPressione Enter para voltar ao menu.\n");
-                                getchar(); // Aguarda até o usuário pressionar Enter
+                                getchar();    // Aguarda até o usuário pressionar Enter
                                 limparTela(); // Chama a função que limpa a tela
                             }
                             else
@@ -419,9 +428,10 @@ int main()
                                 trocar_preco_de_custo(&caixa, novoprecodecusto, precodecusto, r);
                                 limparTela(); // Chama a função que limpa a tela
                                 printf("Preço de custo do produto editado com sucesso !!!\n");
-                                while (getchar() != '\n');  // Remove o '\n' ou qualquer caractere restante no buffer
+                                while (getchar() != '\n')
+                                    ; // Remove o '\n' ou qualquer caractere restante no buffer
                                 printf("\nPressione Enter para voltar ao menu.\n");
-                                getchar(); // Aguarda até o usuário pressionar Enter
+                                getchar();    // Aguarda até o usuário pressionar Enter
                                 limparTela(); // Chama a função que limpa a tela
                             }
                             else
@@ -475,9 +485,10 @@ int main()
                         printf("sucesso !!, adicionou %d %s  no estoque  \n", quantidade_adicional, nome[r]);
                         adicionar_produtos(quantidade, r, quantidade_adicional);
                         printf("Contem %d unidades de %s em estoque no momento\n", quantidade[r], nome[r]);
-                        while (getchar() != '\n');// Remove o '\n' ou qualquer caractere restante no buffer
+                        while (getchar() != '\n')
+                            ; // Remove o '\n' ou qualquer caractere restante no buffer
                         printf("\nPressione Enter para voltar ao menu.\n");
-                        getchar(); // Aguarda até o usuário pressionar Enter      
+                        getchar();    // Aguarda até o usuário pressionar Enter
                         limparTela(); // Chama a função que limpa a tela
                     }
                     else
@@ -525,12 +536,11 @@ int main()
                     printf("A quantidade do produto escolhido no estoque atual é = %d\n", quantidade[r]);
                     printf("Digite uma quantidade de saida menor ou igual a quantidade do produto atual, para dar certo :\n");
                     scanf("%d", &quantidade_saida);
-                    
                 }
                 limparTela(); // Chama a função que limpa a tela
                 printf("sucesso !!, a nova quantidade de produtos no estoque é =%d \n", saida_de_produtos(quantidade, quantidade_saida, r));
 
-                if (quantidade[r] < 3)//Verifica se a quantidade do estoque está baixa.
+                if (quantidade[r] < 3) // Verifica se a quantidade do estoque está baixa.
                 {
                     printf("\n-------------------------------------------------------------\n");
                     printf("Quantide do produto %s baixa, contem no estoque %d unidades \n", nome[r], quantidade[r]);
@@ -541,9 +551,10 @@ int main()
                 adicionar_lucro(&caixa, quantidade_saida, precodevenda, r);
                 printf("Caixa atualizado !!!!!!\n");
                 printf(" Caixa = R$ %.2f\n", caixa);
-                while (getchar() != '\n');// Remove o '\n' ou qualquer caractere restante no buffer
+                while (getchar() != '\n')
+                    ; // Remove o '\n' ou qualquer caractere restante no buffer
                 printf("\nPressione Enter para voltar ao menu.\n");
-                getchar(); // Aguarda até o usuário pressionar Enter      
+                getchar();    // Aguarda até o usuário pressionar Enter
                 limparTela(); // Chama a função que limpa a tela
             }
             else
