@@ -254,7 +254,7 @@ int main()
             scanf("%f", &precodevenda[k]);
             printf("Digite a quantidade de produtos : ");
             scanf("%d", &quantidade[k]);
-            printf("Digite o preço que custou os %d produto :",quantidade[k]);
+            printf("Digite o preço que custou os %d produto :", quantidade[k]);
             scanf("%f", &precodecusto[k]);
             caixa -= precodecusto[k];
 
