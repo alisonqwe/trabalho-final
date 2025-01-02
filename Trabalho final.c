@@ -573,7 +573,7 @@ int main()
             printf("Opção 5: Relatórios e Estatísticas.\n");
             break;
         case 6:
-            printf("Programa encerado.\n");
+            printf("Programa encerrado.\n");
             break;
         default:
             printf("\n----------------------------------------------------------------\n");
