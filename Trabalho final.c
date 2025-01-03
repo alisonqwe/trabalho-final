@@ -140,43 +140,30 @@ int saida_de_produtos(int vetor[], int quantidade_de_produtos, int indice)
     return vetor[indice] -= quantidade_de_produtos;
 }
 // Função para consultar caixa.
-void consultarCaixa(float caixa, int k, int quantidade[], float preco_venda[], float preco_custo[])
-{
-    printf("---------------------- Consultar Caixa ----------------------\n");
-    printf("Balanço atual do caixa: R$ %.2f\n", caixa);
+void consultar_caixa(float caixa, int saidas_registradas, char nome[][50], int quantidades_vendidas[], float valores_arrecadados[], int total_saidas) {
+    float lucro_estimado = 0;
 
-    // Verificar se existem produtos cadastrados
-    if (k == 0)
-    {
-        printf("Nenhum produto registrado no sistema.\n");
-        return;
+    // Cálculo do lucro estimado total
+    for (int i = 0; i < total_saidas; i++) {
+        lucro_estimado += valores_arrecadados[i];
     }
 
-    float lucroTotal = 0.0; // Variável para armazenar o lucro total estimado
+    // Exibição das informações
+    printf("\nOpção 4: Consultar Caixa.\n");
+    printf("\n-------------------- Informações do Caixa --------------------\n");
+    printf("- Saldo atual do caixa: R$ %.2f\n", caixa);
+    printf("- Lucro estimado total: R$ %.2f\n", lucro_estimado);
 
-    printf("\nProdutos registrados no sistema:\n");
-    for (int i = 0; i < k; i++)
-    {
-        // Calcular lucro estimado para o produto atual
-        float lucroProduto = (preco_venda[i] * quantidade[i]) - preco_custo[i];
-        lucroTotal += lucroProduto;
-
-        // Exibir detalhes do produto
-        printf("------------------------------------------------------------\n");
-        printf("Produto %d:\n", i + 1);
-        printf("  Preço de venda: R$ %.2f\n", preco_venda[i]);
-        printf("  Preço de custo: R$ %.2f\n", preco_custo[i]);
-        printf("  Quantidade em estoque: %d\n", quantidade[i]);
-        printf("  Lucro estimado: R$ %.2f\n", lucroProduto);
+    printf("\n--------------- Todas as saídas registradas -----------------\n");
+    for (int i = 0; i < total_saidas; i++) {
+        printf("%d. Produto: %s\n", i + 1, nome[i]);
+        printf("   Quantidade vendida: %d unidades\n", quantidades_vendidas[i]);
+        printf("   Valor total arrecadado: R$ %.2f\n", valores_arrecadados[i]);
+        printf("\n");
     }
-
-    // Exibir lucro total estimado
-    printf("------------------------------------------------------------\n");
-    printf("Lucro total estimado com os produtos: R$ %.2f\n", lucroTotal);
-    printf("------------------------------------------------------------\n");
     // Limpar o buffer
-    while (getchar() != '\n')
-        ; // Remove o '\n' ou qualquer caractere restante no buffer
+    while (getchar() != '\n'); // Remove o '\n' ou qualquer caractere restante no buffer
+    printf("-------------------------------------------------------------\n");
     printf("Pressione Enter para continuar.");
     getchar();    // Aguarda até o usuário pressionar Enter
     limparTela(); // Chama a função que limpa a tela
@@ -185,8 +172,8 @@ void consultarCaixa(float caixa, int k, int quantidade[], float preco_venda[], f
 int main()
 {
 
-    int opcao[50], case2[50], case21[50], id[50], quantidade[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, idconsulta, r = 0, i = 0, p = 0, o = 0;
-    float precodevenda[50], precodecusto[50], lucro_estimado[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
+    int opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
+    float precodevenda[50], precodecusto[50], lucro_estimado[50], valores_arrecadados[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
     char nome[50][50], categoria[50][50];
     // Credenciais predefinidas
     const char usuarioCorreto[] = "admin";
@@ -539,7 +526,11 @@ int main()
                 }
                 limparTela(); // Chama a função que limpa a tela
                 printf("sucesso !!, a nova quantidade de produtos no estoque é = %d \n", saida_de_produtos(quantidade, quantidade_saida, r));
-
+                // Registro das saídas
+                saidas_registradas++;  // Incrementa o contador de saídas registradas
+                quantidades_vendidas[r] += quantidade_saida;  // Incrementa a quantidade de produtos vendidos
+                valores_arrecadados[r] += quantidade_saida * precodevenda[r];  // Incrementa o valor arrecadado pela venda
+                total_saidas += quantidade_saida;  // Incrementa o total de saídas
                 if (quantidade[r] < 3) // Verifica se a quantidade do estoque está baixa.
                 {
                     printf("\n-------------------------------------------------------------\n");
@@ -567,7 +558,7 @@ int main()
             break;
         case 4:
             printf("Opção 4: Consultar Caixa.\n");
-            consultarCaixa(caixa, k, quantidade, precodevenda, precodecusto);
+            consultar_caixa(caixa, saidas_registradas, nome, quantidades_vendidas, valores_arrecadados, total_saidas);
             break;
         case 5:
             printf("Opção 5: Relatórios e Estatísticas.\n");
