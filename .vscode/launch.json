@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/wagne/Documents/trabalho-final/output",
-      "program": "c:/Users/wagne/Documents/trabalho-final/output/build/Debug/outDebug",
+      "cwd": "c:/Users/wagne/Documents/trabalho-final",
+      "program": "c:/Users/wagne/Documents/trabalho-final/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
