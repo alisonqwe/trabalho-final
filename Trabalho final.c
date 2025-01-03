@@ -139,6 +139,7 @@ int saida_de_produtos(int vetor[], int quantidade_de_produtos, int indice)
 
     return vetor[indice] -= quantidade_de_produtos;
 }
+
 // Função para consultar caixa.
 void consultar_caixa(float caixa, int saidas_registradas, char nome[][50], int quantidades_vendidas[], float valores_arrecadados[], int total_saidas) {
     float lucro_estimado = 0;
