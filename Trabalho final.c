@@ -151,7 +151,7 @@ int saida_de_produtos(int vetor[], int quantidade_de_produtos, int indice)
 }
 
 // Função para consultar caixa.
-void consultar_caixa(float total, float caixa, int saidas_registradas, char nome[][50], int quantidades_vendidas[], float valores_arrecadados[],int indice[])
+void consultar_caixa(float total, float caixa, int saidas_registradas, char nome[][50], int quantidades_vendidas[], float valores_arrecadados[], int indice[])
 {
 
     // Exibição das informações
@@ -180,7 +180,7 @@ void consultar_caixa(float total, float caixa, int saidas_registradas, char nome
 int main()
 {
 
-    int indice[50],opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
+    int indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
     float precodevenda[50], precodecusto[50], lucro_estimado[50], valores_arrecadados[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
     char nome[50][50], categoria[50][50];
     // Credenciais predefinidas
@@ -541,8 +541,8 @@ int main()
 
                 quantidades_vendidas[saidas_registradas] += quantidade_saida;                  // Incrementa a quantidade de produtos vendidos
                 valores_arrecadados[saidas_registradas] += quantidade_saida * precodevenda[r]; // Incrementa o valor arrecadado pela venda
-                //salvar o indice do produto
-                indice[saidas_registradas]=r;
+                // salvar o indice do produto
+                indice[saidas_registradas] = r;
                 saidas_registradas++;  // Incrementa o contador de saídas registradas
                 if (quantidade[r] < 3) // Verifica se a quantidade do estoque está baixa.
                 {
@@ -572,7 +572,7 @@ int main()
         case 4:
             printf("Opção 4: Consultar Caixa.\n");
             float total_lucro = lucro_de_produtos_estimados(precodevenda, quantidade, k);
-            consultar_caixa(total_lucro, caixa, saidas_registradas, nome, quantidades_vendidas, valores_arrecadados,indice);
+            consultar_caixa(total_lucro, caixa, saidas_registradas, nome, quantidades_vendidas, valores_arrecadados, indice);
             break;
         case 5:
             printf("Opção 5: Relatórios e Estatísticas.\n");
