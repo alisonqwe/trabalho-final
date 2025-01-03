@@ -212,10 +212,10 @@ int main()
         printf("  6- Sair. \n");
         scanf("%d", &opcao[i]);
         limparTela(); // Chama a função que limpa a tela
-        if (opcao[i] == 6)
-        {
-            return 0;
-        }
+       // if (opcao[i] == 6)
+        //{
+        //    return 0;
+        //}
 
         switch (opcao[i])
         {
@@ -566,6 +566,7 @@ int main()
             break;
         case 6:
             printf("Programa encerrado.\n");
+            return 0;
             break;
         default:
             printf("\n----------------------------------------------------------------\n");
