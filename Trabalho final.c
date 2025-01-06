@@ -290,6 +290,7 @@ int main()
 
             printf("Digite o preço que custou os %d produto :", quantidade[k]);
             scanf("%f", &precodecusto[k]);
+             
             if (precodecusto[k] > (precodevenda[k] * quantidade[k]))
             {
                 printf("\n----------------------------------------------------------------\n");
@@ -311,12 +312,29 @@ int main()
                 }
             }
             precodecustounitario[k] = (precodecusto[k] / quantidade[k]);
-            caixa -= precodecusto[k];
+            precodecustounitario[k] += 15;
+            while (precodevenda[k] >= precodecustounitario[k])
+            {
+                printf("Preço de venda muito abusivo!!\nDigite um novo preço unitario de venda:\n");
+                scanf("%f", &precodevenda[k]);
+            }
 
             // lucro_de_produtos_estimados(precodevenda,precodecusto,quantidade,k);
-            k++;
+            
             limparTela(); // Chama a função que limpa a tela
-            printf("Produto cadastrado com sucesso!\n");
+            printf("        Produto cadastrado com sucesso!");
+            printf("\n---------------------------------------------------\n");
+            printf("Código do produto: %d\n", id[k]);
+            printf("Nome do produto: %s\n", nome[k]);
+            printf("Categoria do produto: %s\n", categoria[k]);
+            printf("Preço unitario de venda: R$ %.2f\n", precodevenda[k]);
+            printf("Quantidade de produtos: %.2d\n", quantidade[k]);
+            printf("Preço que custou os %d produto: R$ %.2f\n", quantidade[k], precodecusto[k]);
+            printf("Preço de custo por unidade: R$ %.2f\n", precodecustounitario[k] - 15);
+            printf("\n---------------------------------------------------\n");
+
+            caixa -= precodecusto[k];
+            k++;
             // ponto de parada.
             while (getchar() != '\n')
                 ; // Remove o '\n' ou qualquer caractere restante no buffer
