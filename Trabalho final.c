@@ -3,7 +3,7 @@
 #include <string.h> // Necessário para usar a função strcmp
 #include <stdlib.h> // Necessário para usar a função system()
 
-// Função limpar tela para ambos.
+// Função limpar tela para ambos os sistemas.
 void limparTela()
 {
 #ifdef _WIN32
@@ -132,7 +132,7 @@ int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
 {
     return vetor[indice] += quantidade_de_produtos;
 }
-
+//Função de relatorios e estatistica
 void relatorio_e_estatistica(float preco_de_custo_unitario[], float preco_de_custo[], int quantidade_[], float preco_de_venda[], char nomes[][50], char categorias[][50], int indice,int indice_de_produtos[])
 {
     float lucro_potencial_estimao = 0;
@@ -250,15 +250,25 @@ int main()
         {
         case 1:
             printf("-------------------Cadastro de Produto-----------------\n");
-            printf("Digite o codigo do produto :");
-            scanf("%d", &id[k]);
-            while (verificar1(id, k)) // verifica se o codigo do produto já existe.
-            {
-                limparTela(); // Chama a função que limpa a tela
-                printf("\n----------------------------------------------------------------\n");
-                printf("O código digitado já existe, porfavor digite outro código :\n");
-                printf("\n----------------------------------------------------------------\n");
-                scanf("%d", &id[k]);
+            while (1) { // Solicita e valida o código do produto
+                printf("Digite o código do produto (apenas números): ");
+                if (scanf("%d", &id[k]) != 1) { // Verifica se a entrada é um número válido
+                    limparTela(); // Chama a função que limpa a tela
+                    printf("\n----------------------------------------------------------\n");
+                    printf("       Erro: O código deve ser um número válido!");
+                    printf("\n-----------------------------------------------------------\n");
+                    while (getchar() != '\n'); // Limpa o buffer para evitar loops infinitos
+                } else if (verificar1(id, k)) { // Verifica se o código já existe
+                    limparTela(); // Chama a função que limpa a tela
+                    printf("\n------------------------------------------------------------------\n");
+                    printf("Erro: O código digitado já existe, por favor, digite outro código!");
+                    printf("\n------------------------------------------------------------------\n");
+                } else {
+                    limparTela(); // Chama a função que limpa a tela
+                    printf("-------------------Cadastro de Produto-----------------\n");
+                    printf("Código do produto: %d\n", id[k]);
+                break; // Sai do loop se o código for válido e não repetido
+                }
             }
             printf("Digite o nome do produto : ");
             scanf("%s", &nome[k]);
