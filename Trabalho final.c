@@ -74,11 +74,11 @@ void aparecer(int tam, char matriz[][50])
 }
 
 // função para calcular o lruco estimado de cada produto, com base na quantidade, preço unitario e o preço de custo.
-void calcularlucro(float lucro_estimado[], float venda[], int quanti[], float custo[], int i)
-{
-
-    lucro_estimado[i] += ((venda[i] * quanti[i]) - custo[i]);
-}
+// void calcularlucro(float lucro_estimado[], float venda[], int quanti[], float custo[], int i)
+//{
+//
+// lucro_estimado[i] += ((venda[i] * quanti[i]) - custo[i]);
+//}
 // função para consultar produto em estoque
 int consultar(int consultar, int vetor[], int tam)
 {
@@ -133,15 +133,15 @@ int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
     return vetor[indice] += quantidade_de_produtos;
 }
 
-void relatorio_e_estatistica(float preco_de_custo_unitario[],float preco_de_custo[], int quantidade_[], float preco_de_venda[], char nomes[][50], char categorias[][50], int indice)
+void relatorio_e_estatistica(float preco_de_custo_unitario[], float preco_de_custo[], int quantidade_[], float preco_de_venda[], char nomes[][50], char categorias[][50], int indice,int indice_de_produtos[])
 {
-    float lucro_potencial_estimao=0;
+    float lucro_potencial_estimao = 0;
     printf("                 Produtos cadastrados no sistemas \n");
     printf("------------------------------------------------------------------------------------------\n");
     for (int i = 0; i < indice; i++)
     {
         printf("  %d° :produto \n", i + 1);
-
+        printf(" Codigo do produto : %d\n", indice_de_produtos[i]);
         printf(" Nome do produto : %s\n", nomes[i]);
         printf(" Categoria do produto : %s\n", categorias[i]);
         printf(" Preço unitario de venda : R$= %.2f\n", preco_de_venda[i]);
@@ -149,8 +149,9 @@ void relatorio_e_estatistica(float preco_de_custo_unitario[],float preco_de_cust
         printf(" Valor total do estoque : R$= %.2f\n", (preco_de_custo_unitario[i] * quantidade_[i]));
         printf("\n--------------------------------------------------------\n");
         printf("\n");
+        lucro_potencial_estimao += calcularlucroproduto(i, preco_de_venda, quantidade_, preco_de_custo);
     }
-
+    printf("Lucro potencial estimado com os produtos em estoque : R$= %.2f\n", lucro_potencial_estimao);
 }
 float lucro_de_produtos_estimados(float preco_devenda[], int quantidad[], int indice)
 {
@@ -205,7 +206,7 @@ int main()
 {
     // variáves
     int decisao, indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
-    float precodecustounitario[50],precodevenda[50], precodecusto[50], total_lucro, valores_arrecadados[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
+    float precodecustounitario[50], precodevenda[50], precodecusto[50], total_lucro, valores_arrecadados[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
     char nome[50][50], categoria[50][50];
     // Credenciais predefinidas login
     const char usuarioCorreto[] = "admin";
@@ -299,7 +300,7 @@ int main()
                     break;
                 }
             }
-            precodecustounitario[k]=(precodecusto[k]/quantidade[k]);
+            precodecustounitario[k] = (precodecusto[k] / quantidade[k]);
             caixa -= precodecusto[k];
 
             // lucro_de_produtos_estimados(precodevenda,precodecusto,quantidade,k);
@@ -677,7 +678,7 @@ int main()
             }
             else
             {
-                relatorio_e_estatistica(precodecustounitario,precodecusto ,quantidade, precodevenda, nome, categoria, k);
+                relatorio_e_estatistica(precodecustounitario, precodecusto, quantidade, precodevenda, nome, categoria, k,id);
                 while (getchar() != '\n')
                     ; // Remove o '\n' ou qualquer caractere restante no buffer
                 printf("\nPressione Enter para voltar ao menu.\n");
