@@ -136,8 +136,8 @@ int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
 void relatorio_e_estatistica(float preco_de_custo_unitario[], float preco_de_custo[], int quantidade_[], float preco_de_venda[], char nomes[][50], char categorias[][50], int indice,int indice_de_produtos[])
 {
     float lucro_potencial_estimao = 0;
-    printf("                 Produtos cadastrados no sistemas \n");
-    printf("------------------------------------------------------------------------------------------\n");
+    printf("               Produtos cadastrados no sistemas \n");
+    printf("----------------------------------------------------------\n");
     for (int i = 0; i < indice; i++)
     {
         printf("  %d° :produto \n", i + 1);
