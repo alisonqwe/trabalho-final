@@ -1,5 +1,5 @@
-//Wagner Kauan Mendes dos Santos  -  Turma 1
-//Allison do Vale Santos  -   Turma 2
+// Wagner Kauan Mendes dos Santos  -  Turma 1
+// Allison do Vale Santos  -   Turma 2
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -98,10 +98,10 @@ int consultar(int consultar, int vetor[], int tam)
     return -1;
 }
 // função para calcular margem de lucro esperado do produto com base no preço de venda e no preço de custo unitario
-float calcularlucroproduto(int indice, float preco_venda[], float preco_custo[])
+float calcularlucroproduto(int indice, float preco_venda[], float preco_custo[], int quantidade_[])
 {
 
-    return ((preco_venda[indice] / preco_custo[indice]));
+    return (((preco_venda[indice] * quantidade_[indice]) - (preco_custo[indice] * quantidade_[indice])) / (preco_custo[indice] * quantidade_[indice])) * 100;
 }
 // função para adicionar lucro no cixa quando sair a venda de produtos
 void adicionar_lucro(float *caixa, int saida, float preco[], int indice)
@@ -152,12 +152,12 @@ void relatorio_e_estatistica(float preco_de_custo_unitario[], int quantidade_[],
         printf(" Preço unitario de venda : R$= %.2f\n", preco_de_venda[i]);
         printf(" Quantidade do produto em estoque : %d\n", quantidade_[i]);
         printf(" Valor total do estoque : R$= %.2f\n", (preco_de_custo_unitario[i] * quantidade_[i]));
-        printf(" Margem de lucro: R$=  %.2f%%\n", calcularlucroproduto(i, preco_de_venda, preco_de_custo_unitario));
+        printf(" Margem de lucro aproximadamente : R$=  %.2f%%\n", calcularlucroproduto(i, preco_de_venda, preco_de_custo_unitario, quantidade_));
         printf("\n--------------------------------------------------------\n");
         printf("\n");
-        lucro_potencial_estimao += calcularlucroproduto(i, preco_de_venda, preco_de_custo_unitario);
+        lucro_potencial_estimao += calcularlucroproduto(i, preco_de_venda, preco_de_custo_unitario, quantidade_);
     }
-    printf("A margem de lucro dos protudos em estoque : R$= %.2f%%\n", lucro_potencial_estimao);
+    printf("A margem de lucro aproximadamente dos protudos em estoque : R$= %.2f%%\n", lucro_potencial_estimao);
 }
 
 // função para calcular o lucro total estimado com todos os produtos em estoque
@@ -213,7 +213,7 @@ void consultar_caixa(float total, float caixa_, int saidas__registradas, char pr
 int main()
 {
     // variáves
-    int decisao, indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
+    int produtos_em_estoque_maximo = 50, lucro_maximo = 0, decisao, indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
     float precodecustounitario[50], precodevenda[50], precodecusto[50], total_lucro, valores_arrecadados[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
     char nome[50][50], categoria[50][50];
     // Credenciais predefinidas login
@@ -257,6 +257,19 @@ int main()
         switch (opcao[i])
         {
         case 1:
+            if (produtos_em_estoque_maximo == 0)
+            {
+                printf("\n------------------------------------------------------------------\n");
+                printf("            Número máximo de produtos no estoque já alcançado.\n");
+                printf("\n------------------------------------------------------------------\n");
+                while (getchar() != '\n')
+                    ; // Remove o '\n' ou qualquer caractere restante no buffer
+                printf("\nPressione Enter para continuar.\n");
+                getchar();    // Aguarda até o usuário pressionar Enter
+                limparTela(); // Chama a função que limpa a tela
+                break;
+            }
+
             printf("-------------------Cadastro de Produto-----------------\n");
             while (1)
             { // Solicita e valida o código do produto
@@ -291,9 +304,6 @@ int main()
             printf("Digite a categoria do produto : ");
             scanf("%s", &categoria[k]);
             // aparecer(k, categoria);
-
-            printf("Digite o preço unitario de venda : ");
-            scanf("%f", &precodevenda[k]);
             printf("Digite a quantidade de produtos : ");
             scanf("%d", &quantidade[k]);
             while (quantidade[k] < 0 || quantidade[k] % 1 != 0)
@@ -302,8 +312,15 @@ int main()
                 printf("Digite a quantidade novamento para continuar com o cadastro \n");
                 scanf("%d", &quantidade[k]);
             }
-
-            printf("Digite o preço que custou os %d produto :", quantidade[k]);
+            printf("Digite o preço unitario de venda : ");
+            scanf("%f", &precodevenda[k]);
+            while (precodevenda[k] < 0)
+            {
+                printf("Erro!!!, o preço de venda do produto deve ser um número positivo !\n");
+                printf("Digite o preço de venda novamente para continuar com o cadastro \n");
+                scanf("%f", &precodevenda[k]);
+            }
+            printf("Digite o preço que custou os %d %s :", quantidade[k], nome[k]);
             scanf("%f", &precodecusto[k]);
 
             if (precodecusto[k] > (precodevenda[k] * quantidade[k]))
@@ -326,14 +343,24 @@ int main()
                     break;
                 }
             }
-            precodecustounitario[k] = (precodecusto[k] / quantidade[k]);
-            // while (precodevenda[k] >= precodecustounitario[k])
-            // {
-            //   printf("Preço de venda muito abusivo!!\nDigite um novo preço unitario de venda:\n");
-            // scanf("%f", &precodevenda[k]);
-            //}
 
-            // lucro_de_produtos_estimados(precodevenda,precodecusto,quantidade,k);
+            precodecustounitario[k] = (precodecusto[k] / quantidade[k]);
+            lucro_maximo = 30;
+            if ((lucro_maximo += precodecustounitario[k]) < precodevenda[k])
+            {
+                limparTela(); // Chama a função que limpa a tela
+                printf("\n------------------------------------------------------------------\n");
+                printf("Erro: O preço de venda do produto %s muito alto, algo de errado não esta certo, tente novamnete \n", nome[k]);
+                printf("O lucro maximo que pode ser obtido com o produto %s é de R$ %.2d reais\n", nome[k], lucro_maximo);
+                printf("O cadastro sera excluido, se presistir o problema procure ajuda !\n");
+                // ponto de parada.
+                while (getchar() != '\n')
+                    ; // Remove o '\n' ou qualquer caractere restante no buffer
+                printf("\nPressione Enter para continuar.\n");
+                getchar();    // Aguarda até o usuário pressionar Enter
+                limparTela(); // Chama a função que limpa a tela
+                break;
+            }
 
             limparTela(); // Chama a função que limpa a tela
             printf("        Produto cadastrado com sucesso!");
@@ -349,6 +376,7 @@ int main()
 
             caixa -= precodecusto[k];
             k++;
+            produtos_em_estoque_maximo--;
             // ponto de parada.
             while (getchar() != '\n')
                 ; // Remove o '\n' ou qualquer caractere restante no buffer
@@ -403,7 +431,7 @@ int main()
                         printf(" Preço unitario de venda : R$= %.2f\n", precodevenda[r]);
                         printf(" Preço de custo do produto : R$= %.2f\n", precodecusto[r]);
                         printf(" Quantidade do produto em estoque : %d\n", quantidade[r]);
-                        printf(" Margem de lucro esperado do produto: R$= %.2f%%\n", calcularlucroproduto(r, precodevenda, precodecustounitario));
+                        printf(" Margem de lucro esperado do produto: R$= %.2f%%\n", calcularlucroproduto(r, precodevenda, precodecustounitario, quantidade));
                         printf("\n--------------------------------------------------------\n");
                         while (getchar() != '\n')
                             ; // Remove o '\n' ou qualquer caractere restante no buffer
@@ -725,8 +753,8 @@ int main()
                 valores_arrecadados[saidas_registradas] += (quantidade_saida * precodevenda[r]); // Incrementa o valor arrecadado pela venda
                 // salvar o indice do produto
                 indice[saidas_registradas] = r;
-                saidas_registradas++;  // Incrementa o contador de saídas registradas
-                if (quantidade[r] < 3) // Verifica se a quantidade do estoque está baixa.
+                saidas_registradas++;   // Incrementa o contador de saídas registradas
+                if (quantidade[r] <= 3) // Verifica se a quantidade do estoque está baixa.
                 {
                     printf("\n-------------------------------------------------------------\n");
                     printf("Quantide do produto %s baixa, contem no estoque %d unidades \n", nome[r], quantidade[r]);
