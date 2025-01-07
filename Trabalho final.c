@@ -213,7 +213,7 @@ void consultar_caixa(float total, float caixa_, int saidas__registradas, char pr
 int main()
 {
     // variáves
-    int produtos_em_estoque_maximo = 50, lucro_maximo = 0, decisao, indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
+    int temp, produtos_em_estoque_maximo = 50, lucro_maximo = 0, decisao, indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
     float precodecustounitario[50], precodevenda[50], precodecusto[50], total_lucro, valores_arrecadados[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
     char nome[50][50], categoria[50][50];
     // Credenciais predefinidas login
@@ -345,8 +345,9 @@ int main()
             }
 
             precodecustounitario[k] = (precodecusto[k] / quantidade[k]);
-            lucro_maximo = 30;
-            if ((lucro_maximo += precodecustounitario[k]) < precodevenda[k])
+            temp=precodecustounitario[k];
+            lucro_maximo=(temp+(temp/2));
+            if (lucro_maximo < precodevenda[k])
             {
                 limparTela(); // Chama a função que limpa a tela
                 printf("\n------------------------------------------------------------------\n");
