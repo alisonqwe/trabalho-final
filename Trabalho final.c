@@ -1,3 +1,6 @@
+//Wagner Kauan Mendes dos Santos  -  Turma 1
+//Allison do Vale Santos  -   Turma 2
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h> // Necessário para usar a função strcmp
