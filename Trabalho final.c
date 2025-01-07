@@ -80,6 +80,8 @@ void aparecer(int tam, char matriz[][50])
 // lucro_estimado[i] += ((venda[i] * quanti[i]) - custo[i]);
 //}
 // função para consultar produto em estoque
+
+// função para verificar se id digitado pelo usuario existe no estoque
 int consultar(int consultar, int vetor[], int tam)
 {
     for (int i = 0; i < tam; i++)
@@ -92,11 +94,11 @@ int consultar(int consultar, int vetor[], int tam)
 
     return -1;
 }
-// função para calcular lucro esperado do produto
+// função para calcular margem de lucro esperado do produto com base no preço de venda e no preço de custo unitario
 float calcularlucroproduto(int indice, float preco_venda[], float preco_custo[])
 {
 
-    return ((preco_venda[indice] / preco_custo[indice]) * 100);
+    return ((preco_venda[indice] / preco_custo[indice]));
 }
 // função para adicionar lucro no cixa quando sair a venda de produtos
 void adicionar_lucro(float *caixa, int saida, float preco[], int indice)
@@ -154,6 +156,8 @@ void relatorio_e_estatistica(float preco_de_custo_unitario[], int quantidade_[],
     }
     printf("A margem de lucro dos protudos em estoque : R$= %.2f%%\n", lucro_potencial_estimao);
 }
+
+// função para calcular o lucro total estimado com todos os produtos em estoque
 float lucro_de_produtos_estimados(float preco_devenda[], int quantidad[], int indice)
 {
     float lucrototal = 0;
@@ -336,7 +340,7 @@ int main()
             printf("Categoria do produto: %s\n", categoria[k]);
             printf("Preço unitario de venda: R$ %.2f\n", precodevenda[k]);
             printf("Quantidade de produtos: %.2d\n", quantidade[k]);
-            printf("Preço que custou os %d produto: R$ %.2f\n", quantidade[k], precodecusto[k]);
+            printf("Preço que custou os %d %s: R$ %.2f\n", quantidade[k], nome[k], precodecusto[k]);
             printf("Preço de custo por unidade: R$ %.2f\n", precodecustounitario[k]);
             printf("\n---------------------------------------------------\n");
 
@@ -396,7 +400,7 @@ int main()
                         printf(" Preço unitario de venda : R$= %.2f\n", precodevenda[r]);
                         printf(" Preço de custo do produto : R$= %.2f\n", precodecusto[r]);
                         printf(" Quantidade do produto em estoque : %d\n", quantidade[r]);
-                        printf(" margem de lucro espero do produto: R$= %.2f%%\n", calcularlucroproduto(r, precodevenda, precodecustounitario));
+                        printf(" Margem de lucro esperado do produto: R$= %.2f%%\n", calcularlucroproduto(r, precodevenda, precodecustounitario));
                         printf("\n--------------------------------------------------------\n");
                         while (getchar() != '\n')
                             ; // Remove o '\n' ou qualquer caractere restante no buffer
@@ -562,6 +566,17 @@ int main()
                                 limparTela(); // Chama a função que limpa a tela
                             }
                             break;
+                        case 5:
+                            printf("\n----------------------------------------------------------------\n");
+                            printf("             voltando..\n");
+                            printf("\n----------------------------------------------------------------\n");
+                            printf("\nPressione Enter para voltar ao menu.\n");
+                            while (getchar() != '\n')
+                                ; // Remove o '\n' ou qualquer caractere restante no buffer
+                            printf("\nPressione Enter para continuar.\n");
+                            getchar();    // Aguarda até o usuário pressionar Enter
+                            limparTela(); // Chama a função que limpa a tela
+                            break;
 
                         default:
                             printf("\n----------------------------------------------------------------\n");
@@ -640,7 +655,7 @@ int main()
                     printf("             voltando..\n");
                     printf("\n----------------------------------------------------------------\n");
                     printf("\nPressione Enter para voltar ao menu.\n");
-                   while (getchar() != '\n')
+                    while (getchar() != '\n')
                         ; // Remove o '\n' ou qualquer caractere restante no buffer
                     printf("\nPressione Enter para continuar.\n");
                     getchar();    // Aguarda até o usuário pressionar Enter
