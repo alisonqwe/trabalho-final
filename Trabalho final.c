@@ -132,8 +132,8 @@ int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
 {
     return vetor[indice] += quantidade_de_produtos;
 }
-//Função de relatorios e estatistica
-void relatorio_e_estatistica(float preco_de_custo_unitario[], float preco_de_custo[], int quantidade_[], float preco_de_venda[], char nomes[][50], char categorias[][50], int indice,int indice_de_produtos[])
+// Função de relatorios e estatistica
+void relatorio_e_estatistica(float preco_de_custo_unitario[], float preco_de_custo[], int quantidade_[], float preco_de_venda[], char nomes[][50], char categorias[][50], int indice, int indice_de_produtos[])
 {
     float lucro_potencial_estimao = 0;
     printf("               Produtos cadastrados no sistemas \n");
@@ -147,6 +147,7 @@ void relatorio_e_estatistica(float preco_de_custo_unitario[], float preco_de_cus
         printf(" Preço unitario de venda : R$= %.2f\n", preco_de_venda[i]);
         printf(" Quantidade do produto em estoque : %d\n", quantidade_[i]);
         printf(" Valor total do estoque : R$= %.2f\n", (preco_de_custo_unitario[i] * quantidade_[i]));
+        printf(" Lucro estimado do poduto : R$= %.2f\n", calcularlucroproduto(i, preco_de_venda, quantidade_, preco_de_custo));
         printf("\n--------------------------------------------------------\n");
         printf("\n");
         lucro_potencial_estimao += calcularlucroproduto(i, preco_de_venda, quantidade_, preco_de_custo);
@@ -250,24 +251,31 @@ int main()
         {
         case 1:
             printf("-------------------Cadastro de Produto-----------------\n");
-            while (1) { // Solicita e valida o código do produto
+            while (1)
+            { // Solicita e valida o código do produto
                 printf("Digite o código do produto (apenas números): ");
-                if (scanf("%d", &id[k]) != 1) { // Verifica se a entrada é um número válido
+                if (scanf("%d", &id[k]) != 1)
+                {                 // Verifica se a entrada é um número válido
                     limparTela(); // Chama a função que limpa a tela
                     printf("\n----------------------------------------------------------\n");
                     printf("       Erro: O código deve ser um número válido!");
                     printf("\n-----------------------------------------------------------\n");
-                    while (getchar() != '\n'); // Limpa o buffer para evitar loops infinitos
-                } else if (verificar1(id, k)) { // Verifica se o código já existe
+                    while (getchar() != '\n')
+                        ; // Limpa o buffer para evitar loops infinitos
+                }
+                else if (verificar1(id, k))
+                {                 // Verifica se o código já existe
                     limparTela(); // Chama a função que limpa a tela
                     printf("\n------------------------------------------------------------------\n");
                     printf("Erro: O código digitado já existe, por favor, digite outro código!");
                     printf("\n------------------------------------------------------------------\n");
-                } else {
+                }
+                else
+                {
                     limparTela(); // Chama a função que limpa a tela
                     printf("-------------------Cadastro de Produto-----------------\n");
                     printf("Código do produto: %d\n", id[k]);
-                break; // Sai do loop se o código for válido e não repetido
+                    break; // Sai do loop se o código for válido e não repetido
                 }
             }
             printf("Digite o nome do produto : ");
@@ -290,7 +298,7 @@ int main()
 
             printf("Digite o preço que custou os %d produto :", quantidade[k]);
             scanf("%f", &precodecusto[k]);
-             
+
             if (precodecusto[k] > (precodevenda[k] * quantidade[k]))
             {
                 printf("\n----------------------------------------------------------------\n");
@@ -312,15 +320,14 @@ int main()
                 }
             }
             precodecustounitario[k] = (precodecusto[k] / quantidade[k]);
-            precodecustounitario[k] += 15;
-            while (precodevenda[k] >= precodecustounitario[k])
-            {
-                printf("Preço de venda muito abusivo!!\nDigite um novo preço unitario de venda:\n");
-                scanf("%f", &precodevenda[k]);
-            }
+            // while (precodevenda[k] >= precodecustounitario[k])
+            // {
+            //   printf("Preço de venda muito abusivo!!\nDigite um novo preço unitario de venda:\n");
+            // scanf("%f", &precodevenda[k]);
+            //}
 
             // lucro_de_produtos_estimados(precodevenda,precodecusto,quantidade,k);
-            
+
             limparTela(); // Chama a função que limpa a tela
             printf("        Produto cadastrado com sucesso!");
             printf("\n---------------------------------------------------\n");
@@ -706,7 +713,7 @@ int main()
             }
             else
             {
-                relatorio_e_estatistica(precodecustounitario, precodecusto, quantidade, precodevenda, nome, categoria, k,id);
+                relatorio_e_estatistica(precodecustounitario, precodecusto, quantidade, precodevenda, nome, categoria, k, id);
                 while (getchar() != '\n')
                     ; // Remove o '\n' ou qualquer caractere restante no buffer
                 printf("\nPressione Enter para voltar ao menu.\n");
