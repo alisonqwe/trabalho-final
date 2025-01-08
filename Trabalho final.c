@@ -216,7 +216,7 @@ void consultar_caixa(float total, float caixa_, int saidas__registradas, char pr
 int main()
 {
     // variáves
-    int  produtos_em_estoque_maximo = 50, decisao, indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
+    int  opp = 0, produtos_em_estoque_maximo = 50, decisao, indice[50], opcao[50], case2[50], case21[50], id[50], quantidade[50], quantidades_vendidas[50], k = 0, quantidade_adicional = 0, quantidade_saida = 0, total_saidas, idconsulta, saidas_registradas = 0, r = 0, i = 0, p = 0, o = 0;
     float temp = 0,precodecustounitario[50], precodevenda[50], precodecusto[50], total_lucro, valores_arrecadados[50], caixa = 0, custo_adicional, novoprecodecusto = 0;
     char nome[50][50], categoria[50][50];
     // Credenciais predefinidas login
@@ -260,8 +260,8 @@ int main()
         switch (opcao[i])
         {
         case 1:
-            // do
-            //{
+             do
+            {
             temp = 0;
             if (produtos_em_estoque_maximo == 0)
             {
@@ -388,16 +388,33 @@ int main()
             printf("Preço que custou os %d %s: R$ %.2f\n", quantidade[k], nome[k], precodecusto[k]);
             printf("Preço de custo por unidade: R$ %.2f\n", precodecustounitario[k]);
             printf("\n---------------------------------------------------\n");
-
-            caixa -= precodecusto[k];
-            k++;
-            produtos_em_estoque_maximo--;
-            // ponto de parada.
-            while (getchar() != '\n')
-                ; // Remove o '\n' ou qualquer caractere restante no buffer
+            printf("Deseja cadastrar outro produto?\n");
+            printf("1- SIM\n");
+            printf("2- NÃO\n");
+            scanf("%d", &opp);
+            if (opp != 1 && opp != 2)
+            {
+                limparTela(); // Chama a função que limpa a tela
+                printf("\n-----------------------\n");
+                printf("  Opção incorreta!!\n");
+                printf("\n-----------------------\n");
+                printf("Voltando ao menu principal.");
+                // ponto de parada.
+            while (getchar() != '\n'); // Remove o '\n' ou qualquer caractere restante no buffer
             printf("\nPressione Enter para continuar.\n");
             getchar();    // Aguarda até o usuário pressionar Enter
             limparTela(); // Chama a função que limpa a tela
+                break;
+            }
+            
+            caixa -= precodecusto[k];
+            k++;
+            produtos_em_estoque_maximo--;
+
+            limparTela(); // Chama a função que limpa a tela
+            
+            }while(opp != 2);
+            
             break;
         case 2:
 
