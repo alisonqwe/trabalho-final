@@ -1,6 +1,6 @@
 // Wagner Kauan Mendes dos Santos  -  Turma 1
 // Allison do Vale Santos  -   Turma 2
-
+// para realizar o login o nome de usuario padrão é "admin" e a senha padrão é "1234"
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h> // Necessário para usar a função strcmp
