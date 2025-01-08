@@ -388,6 +388,9 @@ int main()
                 printf("Preço que custou os %d %s: R$ %.2f\n", quantidade[k], nome[k], precodecusto[k]);
                 printf("Preço de custo por unidade: R$ %.2f\n", precodecustounitario[k]);
                 printf("\n---------------------------------------------------\n");
+                caixa -= precodecusto[k];
+                k++;
+                produtos_em_estoque_maximo--;
                 printf("Deseja cadastrar outro produto?\n");
                 printf("1- SIM\n");
                 printf("2- NÃO\n");
@@ -408,9 +411,7 @@ int main()
                     break;
                 }
 
-                caixa -= precodecusto[k];
-                k++;
-                produtos_em_estoque_maximo--;
+                
 
                 limparTela(); // Chama a função que limpa a tela
 
