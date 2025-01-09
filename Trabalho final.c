@@ -944,4 +944,7 @@ int main()
 
     // printf(" O lucro total foi R$= %.2lf\n", lucrototal);
     return 0;
+    //
+    //
+    //
 }
