@@ -1,11 +1,11 @@
 // Wagner Kauan Mendes dos Santos  -  Turma 1
-// Allison do Vale Santos  -   Turma 2
+// Alison do Vale Santos  -   Turma 2
 // para realizar o login o nome de usuario padrão é "admin" e a senha padrão é "1234"
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h> // Necessário para usar a função strcmp
-#include <stdlib.h> // Necessário para usar a função system()
+#include <stdio.h>   // Necessário para usar as funções de entrada e saída
+#include <stdbool.h> // Necessário para usar o tipo de dados booleano
+#include <string.h>  // Necessário para usar a função strcmp
+#include <stdlib.h>  // Necessário para usar a função system()
 
 // Função limpar tela para ambos os sistemas.
 void limparTela()
@@ -427,6 +427,7 @@ int main()
         case 2:
 
             printf("Opção 2: Consultar, Editar e Realizar Entrada em Estoque.\n");
+            // verifica se existe produtos cadastrados para realizar a opção 2
             if (k == 0)
             {
                 printf("\n-----------------------------------------------------------------------------\n");
@@ -719,6 +720,7 @@ int main()
                     }
                     break;
                 case 3:
+                    // verifica se existe produtos cadastrados
                     if (k == 0)
                     {
                         printf("\n-----------------------------------------------------------------------------------------\n");
@@ -817,6 +819,7 @@ int main()
 
             break;
         case 3:
+            // verifica se existe produtos cadastrados
             if (k == 0)
             {
                 printf("\n--------------------------------------------------------------------------------\n");
