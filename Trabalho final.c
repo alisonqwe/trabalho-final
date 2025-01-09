@@ -96,12 +96,17 @@ int consultar(int consultar, int vetor[], int tam)
 
     return -1;
 }
-// função para calcular margem de lucro esperado do produto com base no preço de venda e no preço de custo unitario
-float calcular_margem_de_lucroproduto(int indice, float preco_venda[], float preco_custo[], int quantidade_[])
+// função para calcular lucro estimado do produto com base no preço de venda, no preço de custo e na quantidade
+float calcular_lucro_estimado(int quantidade_[], float proco_custo_unitario[], float preco_de_venda[], int indice)
 {
-
-    return (((preco_venda[indice] * quantidade_[indice]) - (preco_custo[indice] * quantidade_[indice])) / (preco_custo[indice] * quantidade_[indice])) * 100;
+    return ((preco_de_venda[indice] * quantidade_[indice]) - (proco_custo_unitario[indice] * quantidade_[indice]));
 }
+// função para calcular margem de lucro esperado do produto com base no preço de venda e no preço de custo unitario
+//float calcular_margem_de_lucroproduto(int indice, float preco_venda[], float preco_custo[], int quantidade_[])
+//{
+
+  //  return (((preco_venda[indice] * quantidade_[indice]) - (preco_custo[indice] * quantidade_[indice])) / (preco_custo[indice] * quantidade_[indice])) * 100;
+//}
 // função para adicionar lucro no cixa quando sair a venda de produtos
 void adicionar_lucro(float *caixa, int saida, float preco[], int indice)
 {
@@ -139,8 +144,8 @@ int adicionar_produtos(int vetor[], int indice, int quantidade_de_produtos)
 // Função de relatorios e estatistica
 void relatorio_e_estatistica(float preco_de_custo_unitario[], int quantidade_[], float preco_de_venda[], char nomes[][50], char categorias[][50], int indice, int indice_de_produtos[])
 {
-    float lucro_potencial_estimao = 0;
     float lucro_bruto = 0;
+    float lucro_estimado_total = 0;
     printf("               Produtos cadastrados no sistemas \n");
     printf("----------------------------------------------------------\n");
     for (int i = 0; i < indice; i++)
@@ -150,21 +155,23 @@ void relatorio_e_estatistica(float preco_de_custo_unitario[], int quantidade_[],
         printf(" Nome do produto : %s\n", nomes[i]);
         printf(" Categoria do produto : %s\n", categorias[i]);
         printf(" Preço unitario de venda : R$ %.2f\n", preco_de_venda[i]);
+        printf(" Preço unitario de custo : R$ %.2f\n", preco_de_custo_unitario[i]);
         printf(" Quantidade do produto em estoque : %d\n", quantidade_[i]);
         printf(" Valor total do estoque : R$= %.2f\n", (preco_de_custo_unitario[i] * quantidade_[i]));
-        printf(" Margem de lucro aproximadamente do produto %s : R$  %.2f%%\n", nomes[i], calcular_margem_de_lucroproduto(i, preco_de_venda, preco_de_custo_unitario, quantidade_));
         printf(" Lucro bruto do produto %s no estoque : R$ %.2f\n", nomes[i], calcular_lucro_bruto(quantidade_, preco_de_venda, i));
+        printf(" Lucro estimado do produto %s no estoque : R$ %.2f\n", nomes[i], calcular_lucro_estimado(quantidade_, preco_de_custo_unitario, preco_de_venda, i));
         printf("\n--------------------------------------------------------\n");
         printf("\n");
-        lucro_potencial_estimao += calcular_margem_de_lucroproduto(i, preco_de_venda, preco_de_custo_unitario, quantidade_);
         lucro_bruto += calcular_lucro_bruto(quantidade_, preco_de_venda, i);
+        lucro_estimado_total += calcular_lucro_estimado(quantidade_, preco_de_custo_unitario, preco_de_venda, i);
     }
-    printf("A margem de lucro aproximadamente dos protudos em estoque : R$= %.2f%%\n", lucro_potencial_estimao);
+    printf("\n--------------------------------------------------------\n");
     printf("O lucro bruto total estimado com todos os produtos em estoque : R$ %.2f\n", lucro_bruto);
+    printf("O lucro estimado total com todos os produtos em estoque : R$ %.2f\n", lucro_estimado_total);
 }
 
 // função para calcular o lucro total estimado com todos os produtos em estoque
-float lucro_de_produtos_estimados(float preco_devenda[], int quantidad[], int indice)
+float lucro_total_de_produtos_em_estoque(float preco_devenda[], int quantidad[], int indice)
 {
     float lucrototal = 0;
     for (int i = 0; i < indice; i++)
@@ -187,7 +194,7 @@ void consultar_caixa(float total, float caixa_, int saidas__registradas, char pr
     // Exibição das informações
     printf("\n-------------------- Informações do Caixa --------------------\n");
     printf("- Saldo atual do caixa: R$ %.2f\n", caixa_);
-    printf("- Lucro total estimado com os produtos em estoque: R$ %.2f\n", total);
+    printf("- Lucro total estimado com todos os produtos em estoque: R$ %.2f\n", total);
 
     printf("\n--------------- Todas as saídas registradas -----------------\n");
     if (saidas__registradas == 0) // verifica se houve alguma saida para registrar.
@@ -411,8 +418,6 @@ int main()
                     break;
                 }
 
-                
-
                 limparTela(); // Chama a função que limpa a tela
 
             } while (opp != 2);
@@ -465,10 +470,11 @@ int main()
                         printf(" Nome do produto : %s\n", nome[r]);
                         printf(" Categoria do produto : %s\n", categoria[r]);
                         printf(" Preço unitario de venda : R$ %.2f\n", precodevenda[r]);
-                        printf(" Preço de custo do produto : R$ %.2f\n", precodecusto[r]);
+                        printf(" Preço de custo unitario do produto %s : R$ %.2f\n", nome[r], precodecustounitario[r]);
                         printf(" Quantidade do produto em estoque : %d\n", quantidade[r]);
-                        printf(" Margem de lucro esperado do produto: R$ %.2f%%\n", calcular_margem_de_lucroproduto(r, precodevenda, precodecustounitario, quantidade));
-                        printf(" Lucro bruto do produto : R$ %.2f\n", calcular_lucro_bruto(quantidade, precodevenda, r));
+                        printf(" Valor total do estoque : R$ %.2f\n", (precodecustounitario[r] * quantidade[r]));
+                        printf(" Lucro bruto do produto em estoque : R$ %.2f\n", calcular_lucro_bruto(quantidade, precodevenda, r));
+                        printf(" Lucro estimado do produto em estoque : R$ %.2f\n", calcular_lucro_estimado(quantidade, precodecustounitario, precodevenda, r));
                         printf("\n--------------------------------------------------------\n");
                         while (getchar() != '\n')
                             ; // Remove o '\n' ou qualquer caractere restante no buffer
@@ -890,7 +896,7 @@ int main()
             break;
         case 4:
             printf("Opção 4: Consultar Caixa.\n");
-            total_lucro = lucro_de_produtos_estimados(precodevenda, quantidade, k);
+            total_lucro = lucro_total_de_produtos_em_estoque(precodevenda, quantidade, k);
             consultar_caixa(total_lucro, caixa, saidas_registradas, nome, quantidades_vendidas, valores_arrecadados, indice);
             break;
         case 5:
