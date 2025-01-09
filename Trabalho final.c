@@ -641,7 +641,7 @@ int main()
                             {
 
                                 printf("Preço custo atual do produto : %.2f \n", precodecusto[r]);
-                                printf("Digite o novo preço de custo do prduto :\n");
+                                printf("Digite o novo preço de custo dos %d %s :\n", quantidade[r], nome[r]);
                                 scanf("%f", &novoprecodecusto);
                                 while (novoprecodecusto < 0)
                                 {
@@ -655,7 +655,7 @@ int main()
                                 {
                                     decisao = 0;
                                     printf("\n----------------------------------------------------------------\n");
-                                    printf("Novo Preço de custo do produto %s muito alto, não vai compensar vender o produto \nPois ele não vai retornar lucro !!\n", nome[r]);
+                                    printf("Novo Preço de custo do produto %s muito alto em relação ao preço de venda multiplicado pela quantidade, não vai compensar vender o produto \nPois ele não vai retornar lucro !!\n", nome[r]);
                                     printf("Deseja continuar com o cadasto do produto ?\n");
                                     printf("1- SIM\n");
                                     printf("2- NÃO\n");
