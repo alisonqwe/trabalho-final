@@ -102,10 +102,10 @@ float calcular_lucro_estimado(int quantidade_[], float proco_custo_unitario[], f
     return ((preco_de_venda[indice] * quantidade_[indice]) - (proco_custo_unitario[indice] * quantidade_[indice]));
 }
 // função para calcular margem de lucro esperado do produto com base no preço de venda e no preço de custo unitario
-//float calcular_margem_de_lucroproduto(int indice, float preco_venda[], float preco_custo[], int quantidade_[])
+// float calcular_margem_de_lucroproduto(int indice, float preco_venda[], float preco_custo[], int quantidade_[])
 //{
 
-  //  return (((preco_venda[indice] * quantidade_[indice]) - (preco_custo[indice] * quantidade_[indice])) / (preco_custo[indice] * quantidade_[indice])) * 100;
+//  return (((preco_venda[indice] * quantidade_[indice]) - (preco_custo[indice] * quantidade_[indice])) / (preco_custo[indice] * quantidade_[indice])) * 100;
 //}
 // função para adicionar lucro no cixa quando sair a venda de produtos
 void adicionar_lucro(float *caixa, int saida, float preco[], int indice)
@@ -473,8 +473,8 @@ int main()
                         printf(" Preço de custo unitario do produto %s : R$ %.2f\n", nome[r], precodecustounitario[r]);
                         printf(" Quantidade do produto em estoque : %d\n", quantidade[r]);
                         printf(" Valor total do estoque : R$ %.2f\n", (precodecustounitario[r] * quantidade[r]));
-                        printf(" Lucro bruto do produto em estoque : R$ %.2f\n", calcular_lucro_bruto(quantidade, precodevenda, r));
-                        printf(" Lucro estimado do produto em estoque : R$ %.2f\n", calcular_lucro_estimado(quantidade, precodecustounitario, precodevenda, r));
+                        printf(" Lucro estimado do produto %s no estoque : R$ %.2f\n", nome[r], calcular_lucro_estimado(quantidade, precodecustounitario, precodevenda, r));
+                        printf(" Lucro bruto do produto em estoque: R$ %.2f\n", calcular_lucro_bruto(quantidade, precodevenda, r));
                         printf("\n--------------------------------------------------------\n");
                         while (getchar() != '\n')
                             ; // Remove o '\n' ou qualquer caractere restante no buffer
