@@ -46,7 +46,7 @@ int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tent
         else
         {
             tentativas++;
-            system("cls");
+            limparTela(); // Chama a função que limpa a tela
             printf("Usuário ou senha incorretos. Tentativas restantes: %d\n", tentativasMaximas - tentativas);
         }
     }
