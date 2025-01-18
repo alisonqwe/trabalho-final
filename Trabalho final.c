@@ -91,11 +91,11 @@ int consultar(int consultar, int vetor[], int tam)
     {
         if (vetor[i] == consultar)
         {
-            return i;
+            return i;// se exitir ele retorna a posição do produto
         }
     }
 
-    return -1;
+    return -1;/// return se o produto não existir no estoque
 }
 // função para calcular lucro estimado do produto com base no preço de venda, no preço de custo e na quantidade
 float calcular_lucro_estimado(int quantidade_[], float proco_custo_unitario[], float preco_de_venda[], int indice)
