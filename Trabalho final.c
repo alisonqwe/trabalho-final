@@ -46,7 +46,7 @@ int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tent
         else
         {
             tentativas++;
-            system("cls");
+            limparTela(); // Chama a função que limpa a tela
             printf("Usuário ou senha incorretos. Tentativas restantes: %d\n", tentativasMaximas - tentativas);
         }
     }
@@ -57,18 +57,18 @@ int realizarLogin(const char *usuarioCorreto, const char *senhaCorreta, int tent
 // função para ferificar se o codigo do produto ja existe.
 bool verificar1(int vetor[], int tam)
 {
-    for (int i = 0; i < tam; i++)
+    for (int i = 0; i < tam; i++)// Percorre cada elemento do vetor
     {
-        for (int j = i; j < tam; j++)
+        for (int j = i; j < tam; j++)// Compara com os elementos seguintes
         {
-            if (vetor[i] == vetor[j + 1])
+            if (vetor[i] == vetor[j + 1])// Verifica duplicatas
             {
-                return true;
+                return true;// Retorna true se houver duplicatas
             }
         }
     }
 
-    return false;
+    return false;// Retorna false se não houver duplicatas
 }
 // função para printar o alimento na tela
 void aparecer(int tam, char matriz[][50])
@@ -91,11 +91,11 @@ int consultar(int consultar, int vetor[], int tam)
     {
         if (vetor[i] == consultar)
         {
-            return i;
+            return i;// se exitir ele retorna a posição do produto
         }
     }
 
-    return -1;
+    return -1;/// return se o produto não existir no estoque
 }
 // função para calcular lucro estimado do produto com base no preço de venda, no preço de custo e na quantidade
 float calcular_lucro_estimado(int quantidade_[], float proco_custo_unitario[], float preco_de_venda[], int indice)
