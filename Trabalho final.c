@@ -939,6 +939,7 @@ int main()
             printf("              Opção invalida, tente novamente \n");
             printf("\n----------------------------------------------------------------\n");
             break;
+            
         }
     }
 
